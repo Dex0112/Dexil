@@ -7,7 +7,6 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const prefix = '-';
 
 const fs = require('fs');
-const { env } = require('process');
 
 client.commands = new Discord.Collection();
 
