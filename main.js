@@ -32,13 +32,13 @@ client.on('messageCreate', message => {
     if(message.author.username == "The PrideDutchie")
         message.reply("Yiff");
 
-    if(message.author.username == "GentleWeeaboo")
+    if(message.author.username == "Gentleweaboo")
         message.reply("Long live!");
     
     if(message.author.username == "CrusaderHalo")
         message.reply("Terraria?");
 
-    if(message.author.username == "Superred")
+    if(message.author.username == "Superred06")
         message.reply("U got games on ur phone?");
     
     if(message.author.username == "Burger")
