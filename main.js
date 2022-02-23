@@ -36,7 +36,13 @@ client.on('messageCreate', message => {
         message.reply("Long live!");
     
     if(message.author.username == "CrusaderHalo")
-        message.reply("MMmmmmMMmmmMMmm");
+        message.reply("Terraria?");
+
+    if(message.author.username == "Superred")
+        message.reply("U got games on ur phone?");
+    
+    if(message.author.username == "Burger")
+        message.reply("Generic Lord Weeaboo TBH. Boom Roasted. (jkjk)");
 
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
