@@ -7,6 +7,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const prefix = '-';
 
 const fs = require('fs');
+const { env } = require('process');
 
 client.commands = new Discord.Collection();
 
@@ -24,7 +25,7 @@ client.once('ready', () => {
 
 client.on('messageCreate', message => {
     if(message.author.username == "AugustTheBot1")
-        message.reply("Shut up!");
+        message.reply("👁️ 👄 👁️");
 
     if(message.author.username == "DexUSE")
         message.reply("Hey daddy");
@@ -51,4 +52,4 @@ client.on('messageCreate', message => {
 
 
 //Must be last line
-client.login('OTM5NzI3OTM0MDAyOTU0MzIx.Yf9D1g.iMcVf6RZ1gJWPsArwQYgTW27VZ4');
+client.login(process.env.BOT_TOKEN);
