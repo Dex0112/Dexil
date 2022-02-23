@@ -1,0 +1,1 @@
+web: nost dist/server.js
