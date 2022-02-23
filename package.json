@@ -1,0 +1,19 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "My first attempt at making a discord bot.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "devStart": "nodemon"
+  },
+  "author": "Dex",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
