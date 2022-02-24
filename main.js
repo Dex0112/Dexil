@@ -30,8 +30,6 @@ client.on('messageCreate', message => {
 
     const args = message.content.slice(prefix.length).split(/ + /);
 
-    console.log(args.shift());
-
     const commandKey = args.shift().toLocaleLowerCase();
 
     const command = client.commands.get(commandKey);
