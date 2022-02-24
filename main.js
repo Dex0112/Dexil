@@ -26,27 +26,11 @@ client.on('messageCreate', message => {
     if(message.author.username == "AugustTheBot1")
         message.reply("👁️ 👄 👁️");
 
-    if(message.author.username == "DexUSE")
-        message.reply("Hey daddy");
-
-    if(message.author.username == "The PrideDutchie")
-        message.reply("Yiff");
-
-    if(message.author.username == "Gentleweaboo")
-        message.reply("Long live!");
-    
-    if(message.author.username == "CrusaderHalo")
-        message.reply("Terraria?");
-
-    if(message.author.username == "Superred06")
-        message.reply("U got games on ur phone?");
-    
-    if(message.author.username == "Burger")
-        message.reply("Generic Lord Weeaboo TBH. Boom Roasted. (jkjk)");
-
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ + /);
+
+    console.log(args.shift());
 
     const commandKey = args.shift().toLocaleLowerCase();
 
