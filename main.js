@@ -47,6 +47,20 @@ client.on('messageCreate', message => {
 
     const command = client.commands.get(commandKey);
 
+    if(commandKey === "help") {
+        var help = "";
+
+        client.commands.forEach(command => {
+            help += `${command.name}: ${command.description}\n`;
+        });
+
+        help.trim();
+
+        message.reply(help);
+
+        return;
+    }
+
     if (command != null)
         command.execute(message, args);
 });
@@ -54,10 +68,6 @@ client.on('messageCreate', message => {
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('channelID').send("GET OUT!");
 });
-
- function testFunction() {
-     console.log("Testing");
- }
 
 //Must be last line
 client.login(process.env.BOT_TOKEN);
