@@ -13,8 +13,8 @@ module.exports = {
         if(args[0] > 99) return message.reply("You cannot delete more than 99 mesages!");
         if(args[0] < 1) return message.reply("You must delete at least one message!");
 
-        await message.channel.messages.fetch({limit: args[0] + 1}).then(messages => {
-            message.channel.bulkDelete(messages);
+        await message.channel.messages.fetch({limit: parseInt(args[0]) + 1}).then(messages => {
+            message.channel.bulkDelete(messages, true);
         });
     }
 }
