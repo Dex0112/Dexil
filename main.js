@@ -51,6 +51,5 @@ client.on('messageCreate', message => {
         command.execute(message, args);
 });
 
-
 //Must be last line
 client.login(process.env.BOT_TOKEN);
