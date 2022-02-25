@@ -9,6 +9,7 @@ const prefix = '-';
 const fs = require('fs');
 
 client.commands = new Discord.Collection();
+client.responses = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
@@ -23,7 +24,7 @@ for(const file of commandFiles) {
 for(const file of responseFiles) {
     const response = require(`./responses/${file}`);
 
-    client.responses.set(response.trigger.toLowerCase(), response);
+    client.responses.set(response.trigger.toLocaleLowerCase(), response);
 }
 
 client.once('ready', () => {
