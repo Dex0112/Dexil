@@ -69,5 +69,9 @@ client.on('guildMemberAdd', member => {
     member.guild.channels.get('channelID').send("GET OUT!");
 });
 
+ function testFunction() {
+     console.log("Testing");
+ }
+
 //Must be last line
 client.login(process.env.BOT_TOKEN);

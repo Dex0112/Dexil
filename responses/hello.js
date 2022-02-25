@@ -1,6 +1,10 @@
+const helper = require("../helper.js");
+
 module.exports = {
     trigger: "Hello Dexil",
-    execute(message) {
-        message.reply(`Hello ${message.author.username}`);
+    async execute(message) {
+        console.log(lib);
+
+        message.reply(`Hello ${helper.getAuthorDisplayName(message)}`);
     }
 }

@@ -1,3 +1,5 @@
+const helper = require("../helper.js");
+
 module.exports = {
     trigger: "Good morning Dexil",
     replies: [
@@ -6,9 +8,8 @@ module.exports = {
         "no",
     ],
     execute(message) {
-        const reply = this.replies[Math.floor(Math.random() * this.replies.length)];
-
-        reply.replace("@", `${message.author.username}`);
+        var reply = this.replies[Math.floor(Math.random() * this.replies.length)]
+            .replace("@", `${helper.getAuthorDisplayName(message)}`);
 
         message.reply(reply);
     }
