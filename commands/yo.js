@@ -8,7 +8,7 @@ module.exports = {
         }
         
 
-        for(var i = 0; i < 10; i++) {
+        for(var i = 0; i <= 15; i++) {
             message.channel.send("YO");
         }
 
