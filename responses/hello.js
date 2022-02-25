@@ -2,9 +2,7 @@ const helper = require("../helper.js");
 
 module.exports = {
     trigger: "Hello Dexil",
-    async execute(message) {
-        console.log(lib);
-
+    execute(message) {
         message.reply(`Hello ${helper.getAuthorDisplayName(message)}`);
     }
 }
