@@ -21,7 +21,7 @@ for(const file of commandFiles) {
 }
 
 for(const file of responseFiles) {
-    const response = requre(`./responses/${file}`);
+    const response = require(`./responses/${file}`);
 
     client.responses.set(response.trigger.toLowerCase(), response);
 }
