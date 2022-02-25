@@ -15,13 +15,13 @@ const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith(
 
 const responseFiles = fs.readdirSync('./responses/').filter(file => file.endsWith('.js'));
 
-for(const file of commandFiles) {
+for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
     client.commands.set(command.name, command);
 }
 
-for(const file of responseFiles) {
+for (const file of responseFiles) {
     const response = require(`./responses/${file}`);
 
     client.responses.set(response.trigger.toLocaleLowerCase(), response);
@@ -34,22 +34,25 @@ client.once('ready', () => {
 client.on('messageCreate', message => {
     const response = client.responses.get(message.content.toLowerCase());
 
-    if(response != null) {
+    if (response != null) {
         response.execute(message);
         return;
     }
 
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    
-    const args = message.content.slice(prefix.length).split(/ + /);
+    const args = message.content.slice(prefix.length).split(/ +/);
 
     const commandKey = args.shift().toLocaleLowerCase();
-    
+
     const command = client.commands.get(commandKey);
-    
-    if(command != null)
+
+    if (command != null)
         command.execute(message, args);
+});
+
+client.on('guildMemberAdd', member => {
+    member.guild.channels.get('channelID').send("GET OUT!");
 });
 
 //Must be last line
