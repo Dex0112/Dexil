@@ -8,6 +8,8 @@ module.exports = {
     execute(message) {
         const reply = this.replies[Math.floor(Math.random() * this.replies.length)];
 
-        reply.replace("@", `${message.author.username}`)
+        reply.replace("@", `${message.author.username}`);
+
+        message.reply(reply);
     }
 }
