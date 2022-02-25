@@ -12,10 +12,18 @@ client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
+const responseFiles = fs.readdirSync('./responses/').filter(file => file.endsWith('.js'));
+
 for(const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
     client.commands.set(command.name, command);
+}
+
+for(const file of responseFiles) {
+    const response = requre(`./responses/${file}`);
+
+    client.responses.set(response.trigger.toLowerCase(), response);
 }
 
 client.once('ready', () => {
@@ -23,8 +31,12 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', message => {
-    if(message.author.username == "AugustTheBot1")
-        message.reply("👁️ 👄 👁️");
+    const response = client.responses.get(message.content.toLowerCase());
+
+    if(response != null) {
+        response.execute(message);
+        return;
+    }
 
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -33,6 +45,7 @@ client.on('messageCreate', message => {
     const commandKey = args.shift().toLocaleLowerCase();
 
     const command = client.commands.get(commandKey);
+
     if(command != null)
         command.execute(message, args);
 });
