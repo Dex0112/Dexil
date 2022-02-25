@@ -45,6 +45,20 @@ client.on('messageCreate', message => {
 
     const commandKey = args.shift().toLocaleLowerCase();
 
+    if(commandKey === "help") {
+        var help = "";
+
+        client.commands.forEach(command => {
+            help += `${command.name}: ${command.description}\n`;
+        });
+
+        help.trim();
+
+        message.reply(help);
+
+        return;
+    }
+
     const command = client.commands.get(commandKey);
 
     if (command != null)

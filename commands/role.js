@@ -1,6 +1,6 @@
 module.exports = {
     name: "role",
-    description: "gives roles",
+    description: "Gives requested roles (limited)",
     execute(message, args) {
         if(args[0] == null)
             return message.reply("Please insert a valid role");

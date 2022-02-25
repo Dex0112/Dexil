@@ -1,6 +1,6 @@
 module.exports = {
     name: "yo",
-    description: "yo!",
+    description: "Yo! (only accessable in bot-spam)",
     execute(message, args) {
         if(message.channel != 945730937432444998) {
             message.reply("Must be in bot-spam for this command!");
