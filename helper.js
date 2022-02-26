@@ -1,7 +1,7 @@
 module.exports = { 
     getAuthorDisplayName: (message) => {
         const member = message.guild.members.cache.get(message.author.id);
-        return this.getDisplayName(member);
+        return module.exports.getDisplayName(member);
     },
 
     getDisplayName: (member)  => {
