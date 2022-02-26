@@ -24,7 +24,9 @@ for (const file of commandFiles) {
 for (const file of responseFiles) {
     const response = require(`./responses/${file}`);
 
-    client.responses.set(response.trigger.toLocaleLowerCase(), response);
+    for(const trigger of response.triggers) {
+        client.responses.set(trigger.toLowerCase(), response);
+    }
 }
 
 client.once('ready', () => {
