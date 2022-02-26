@@ -5,8 +5,7 @@ module.exports = {
         "Love you Dexil",
         "Dexil, smokin",
         "Dexil be looking submissive and breedable",
-        "Dexil <3",
-        "Dexil :heart:",
+        "Dexil ❤️",
         "Dexil is cute",
         "Dexil lookin fine"
     ],

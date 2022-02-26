@@ -22,6 +22,6 @@ module.exports = {
         if(reply == "")
             return message.reply("There are no commands!");
 
-        message.reply(reply);
+        message.reply(`\`\`\`${reply}\`\`\``);
     }
 }
