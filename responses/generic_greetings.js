@@ -3,6 +3,7 @@ const helper = require("../helper.js");
 module.exports = {
     triggers: [
         "Hello Dexil",
+        "Hey Dexil",
         "Hi Dexil",
         "Hola Dexil",
         "Dexil, I'm here",
