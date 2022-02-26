@@ -1,6 +1,13 @@
 module.exports = { 
     getAuthorDisplayName: (message) => {
         const member = message.guild.members.cache.get(message.author.id);
-        return member.nickname ? member.nickname : message.author.username;
+        return this.getDisplayName(member);
+    },
+
+    getDisplayName: (member)  => {
+        if(!member)
+            return null;
+
+        return member.nickname ? member.nickname : member.username;
     }
 }
