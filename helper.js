@@ -8,6 +8,6 @@ module.exports = {
         if(!member)
             return null;
 
-        return member.nickname ? member.nickname : member.username;
+        return member.nickname ? member.nickname : member.user.username;
     }
 }
