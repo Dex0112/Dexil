@@ -2,7 +2,7 @@ const helper = require("../helper.js");
 
 module.exports = {
     triggers: [
-        "Dm me Dexil ;)",
+        "Dm me Dexil :wink:",
         "Dexil, lets move this to dms"
     ],
     responses: [

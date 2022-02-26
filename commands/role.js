@@ -5,7 +5,7 @@ module.exports = {
         if(args[0] == null)
             return message.reply("Please insert a valid role");
         
-        const role = message.guild.roles.cache.find(r => r.name === args[0]);
+        const role = message.guild.roles.cache.find(r => r.name === args[0].replace("_", " "));
 
         if(role == null)
             return message.reply("Role does not exist!");

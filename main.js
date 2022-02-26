@@ -4,6 +4,8 @@ const Discord = require('discord.js');
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
+module.exports.client = client;
+
 const prefix = '-';
 
 const fs = require('fs');
@@ -48,20 +50,6 @@ client.on('messageCreate', message => {
     const commandKey = args.shift().toLocaleLowerCase();
 
     const command = client.commands.get(commandKey);
-
-    if(commandKey === "help") {
-        var help = "";
-
-        client.commands.forEach(command => {
-            help += `${command.name}: ${command.description}\n`;
-        });
-
-        help.trim();
-
-        message.reply(help);
-
-        return;
-    }
 
     if (command != null)
         command.execute(message, args);

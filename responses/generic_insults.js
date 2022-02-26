@@ -1,3 +1,5 @@
+const helper = require("../helper.js");
+
 module.exports = {
     triggers: [
         "Your trash Dexil",
