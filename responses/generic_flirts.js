@@ -16,7 +16,7 @@ module.exports = {
         ":kissing:"
     ],
     execute(message) {
-        const reply = this.replies[Math.floor(Math.random() * this.replies.length)]
+        const reply = this.responses[Math.floor(Math.random() * this.responses.length)]
             .replace("@", helper.getAuthorDisplayName(message));
 
         message.reply(reply);
