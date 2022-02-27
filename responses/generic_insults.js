@@ -5,7 +5,7 @@ module.exports = {
         "Your trash Dexil",
         "Dexil is a bot",
         "Dexil is stupid",
-        "Dexil bad gamber",
+        "Dexil bad gamer",
         "Dexil = trash",
         "Dexil is mistake"
     ],
