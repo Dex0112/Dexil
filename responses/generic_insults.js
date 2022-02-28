@@ -15,7 +15,8 @@ module.exports = {
         "-ban @",
         "@ = trash",
         "@ the real bot here",
-        "Can't even beat muck on easy mode :rofl::rofl::rofl::rofl:"
+        "Can't even beat muck on easy mode :rofl::rofl::rofl::rofl:",
+        "Get some bitches-https://www.farmersonly.com/"
     ],
     execute(message) {
         const reply = this.responses[Math.floor(Math.random() * this.responses.length)]
