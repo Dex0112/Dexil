@@ -1,10 +1,10 @@
 module.exports = { 
-    getAuthorDisplayName(message) {
+    getAuthorDisplayName: (message) => {
         const member = message.guild.members.cache.get(message.author.id);
         return module.exports.getDisplayName(member);
     },
 
-    getDisplayName(member) {
+    getDisplayName: (member) => {
         if(!member)
             return null;
 
