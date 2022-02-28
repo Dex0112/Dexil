@@ -1,12 +1,12 @@
 const helper = require("../helper");
 
 module.exports = {
-    triggers = [
+    triggers: [
         "Goodnight",
         "Night",
         "Goodnight Dexil",
     ],
-    replies = [
+    responses: [
         "Goodnight @",
         "Night <3",
         "Don't come back :)",

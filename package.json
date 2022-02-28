@@ -12,6 +12,7 @@
     "dotenv": "^16.0.0"
   },
   "devDependencies": {
+    "node": "^17.4.0",
     "nodemon": "^2.0.15"
   },
   "repository": {
