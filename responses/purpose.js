@@ -12,8 +12,7 @@ module.exports = {
         "Bot: what is my purpose \nRick: You pass butter. \nBot: Oh My God :frowning:"
     ],
     execute(message) {
-        const reply = this.responses[Math.floor(Math.random() * this.responses.length)]
-            .replace("@", helper.getAuthorDisplayName(message));
+        const reply = this.responses.getRandomElement().replace("@", helper.getAuthorDisplayName(message));
 
         message.reply(reply);
     }

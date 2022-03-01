@@ -10,8 +10,7 @@ module.exports = {
         "no",
     ],
     execute(message) {
-        var reply = this.responses[Math.floor(Math.random() * this.responses.length)]
-            .replace("@", `${helper.getAuthorDisplayName(message)}`);
+        var reply = this.responses.getRandomElement().replace("@", `${helper.getAuthorDisplayName(message)}`);
 
         message.reply(reply);
     }

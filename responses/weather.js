@@ -13,8 +13,7 @@ module.exports = {
         "Not to bad. Bit vibes in the cloud"
     ],
     execute(message) {
-        const reply = this.responses[Math.floor(Math.random() * this.responses.length)]
-            .replace("@", helper.getAuthorDisplayName(message));
+        const reply = this.responses.getRandomElement().replace("@", helper.getAuthorDisplayName(message));
 
         message.reply(reply);
     }

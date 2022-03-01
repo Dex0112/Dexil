@@ -19,8 +19,7 @@ module.exports = {
         "Get some bitches-https://www.farmersonly.com/"
     ],
     execute(message) {
-        const reply = this.responses[Math.floor(Math.random() * this.responses.length)]
-            .replace("@", helper.getAuthorDisplayName(message));
+        const reply = this.responses.getRandomElement().replace("@", helper.getAuthorDisplayName(message));
 
         message.reply(reply);
     }

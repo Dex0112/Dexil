@@ -4,6 +4,9 @@ module.exports = {
     name: "help",
     description: "Helps you with commands",
     execute(message, args) {
+        if(Math.randomIntInRange(0, 2) == 0)
+            return message.reply("There is no helping you");
+
         var reply = "";
 
         const commands = Array.from(main.client.commands.values());
