@@ -1,4 +1,3 @@
-require('dotenv').config();
 const main = require("../main");
 
 module.exports = {
@@ -6,7 +5,7 @@ module.exports = {
     description: "Helps you with commands",
     execute(message, args) {
         if(Math.randomIntInRange(0, 1000) == 0)
-            return message.reply(process.env.SECRET);
+            return message.reply("You are the chosen one!!!!!!!! You have recieved an honor that has a 0.1% chance of happening.");
 
         var reply = "";
 
