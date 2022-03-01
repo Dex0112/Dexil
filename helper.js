@@ -17,5 +17,5 @@ Array.prototype.getRandomElement = function() {
 }
 
 Math.randomIntInRange = function(min, max) {
-    return Math.floor(Math.random * (max - min) + min);
+    return Math.floor(Math.random() * (max - min) + min);
 }

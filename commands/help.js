@@ -1,11 +1,12 @@
+require('dotenv').config();
 const main = require("../main");
 
 module.exports = {
     name: "help",
     description: "Helps you with commands",
     execute(message, args) {
-        if(Math.randomIntInRange(0, 2) == 0)
-            return message.reply("There is no helping you");
+        if(Math.randomIntInRange(0, 1000) == 0)
+            return message.reply(process.env.SECRET);
 
         var reply = "";
 
