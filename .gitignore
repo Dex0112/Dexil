@@ -1,2 +1,4 @@
 .env
 node_modules
+commands/command_template.txt
+responses/response_template.txt
