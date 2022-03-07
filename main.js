@@ -36,6 +36,8 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', message => {
+    if(message.author.bot) return;
+
     if(message.content.toLowerCase().includes("banana") && message.author.username == "AugustTheBot1") {
         message.delete();
         return;
@@ -48,7 +50,7 @@ client.on('messageCreate', message => {
         return;
     }
 
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
 
