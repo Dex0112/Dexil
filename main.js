@@ -36,13 +36,6 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', message => {
-    if(message.author.bot) return;
-
-    if(message.content.toLowerCase().includes("banana") && message.author.username == "AugustTheBot1") {
-        message.delete();
-        return;
-    }
-
     const response = client.responses.get(message.content.toLowerCase());
 
     if (response != null) {

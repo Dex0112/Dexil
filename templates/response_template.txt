@@ -1,0 +1,15 @@
+const helper = require("../helper.js");
+
+module.exports = {
+    triggers: [
+        ""
+    ],
+    responses: [
+        ""
+    ],
+    execute(message) {
+        const reply = this.responses.getRandomElement().replace("@", helper.getAuthorDisplayName(message));
+
+        message.reply(reply);
+    }
+}
