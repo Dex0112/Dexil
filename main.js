@@ -56,7 +56,7 @@ client.on('messageCreate', message => {
 });
 
 client.on('guildMemberAdd', member => {
-    member.guild.channels.get('channelID').send("GET OUT!");
+    member.guild.channels.get('939667236786937898').send("GET OUT!");
 });
 
 //Must be last line
