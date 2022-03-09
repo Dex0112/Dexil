@@ -10,6 +10,8 @@ const prefix = '-';
 
 const fs = require('fs');
 
+const helper = require('./helper.js');
+
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
 
@@ -53,10 +55,6 @@ client.on('messageCreate', message => {
 
     if (command != null)
         command.execute(message, args);
-});
-
-client.on('guildMemberAdd', member => {
-    member.guild.channels.get('939667236786937898').send("GET OUT!");
 });
 
 //Must be last line
