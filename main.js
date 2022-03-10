@@ -38,6 +38,8 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', message => {
+    if(message.author.bot) return;
+
     const response = client.responses.get(message.content.toLowerCase());
 
     if (response != null) {
