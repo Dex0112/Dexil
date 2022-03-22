@@ -64,6 +64,8 @@ module.exports = {
             love: data.love + dataMutation.love
         };
 
+        console.log(newData);
+
         this.updateDatabase(newData);
 
         return newData;
