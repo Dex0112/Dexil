@@ -60,6 +60,8 @@ client.on('messageCreate', async message => {
 
         if (command != null)
             command.execute(message, args);
+
+        return;
     }
 
     const response = client.responses.get(message.content.toLowerCase());
