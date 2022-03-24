@@ -106,8 +106,8 @@ setInterval(() => {
     const date = new Date();
 
     const runTime = {
-        hour: 7,
-        minute: 45
+        hour: 11,
+        minute: 50
     }
 
     console.log(`${date.getHours()}:${date.getMinutes()}`);
