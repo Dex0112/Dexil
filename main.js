@@ -114,7 +114,8 @@ setInterval(() => {
     if(date.getHours() != runTime.hour || date.getMinutes() != runTime.minute)
         return;
 
-    const pfp = profilePictures.getRandomElement();
+    const pfp = profilePictures.shift();
+    profilePictures.push(pfp);
 
     client.user.setAvatar(`./Profile_Pictures/${pfp}`);
 
