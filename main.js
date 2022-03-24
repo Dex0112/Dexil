@@ -105,9 +105,10 @@ client.once('guildMemberAdd', member => {
 setInterval(() => {
     const date = new Date();
 
+    //Three hours ahead
     const runTime = {
-        hour: 11,
-        minute: 50
+        hour: 7,
+        minute: 20
     }
 
     console.log(`${date.getHours()}:${date.getMinutes()}`);
