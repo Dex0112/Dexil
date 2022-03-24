@@ -8,12 +8,14 @@ module.exports = {
         "Dexil be looking submissive and breedable",
         "Dexil ❤️",
         "Dexil is cute",
-        "Dexil lookin fine"
+        "Dexil lookin fine",
+        "😘"
     ],
     responses: [
         ":heart::heart::heart:",
         "Not too bad yourself!",
-        ":kissing:"
+        ":kissing:",
+        "😘"
     ],
     execute(message) {
         const MIN_BASE_GAIN_LOVE = -1;
