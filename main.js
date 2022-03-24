@@ -111,8 +111,6 @@ setInterval(() => {
         minute: 20
     }
 
-    console.log(`${date.getHours()}:${date.getMinutes()}`);
-
     if(date.getHours() != runTime.hour || date.getMinutes() != runTime.minute)
         return;
 
