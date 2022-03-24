@@ -77,11 +77,15 @@ client.on('messageCreate', async message => {
         const MIN_GAINED_EXP = 0;
         const MAX_GAINED_EXP = 10;
 
-        const MESSAGE_LENGTH_WEIGHT = .1;
+        const MAX_EXP_PER_MESSAGE = 17;
+
+        const MESSAGE_LENGTH_WEIGHT = .2;
 
         var gainedExp = Math.randomIntInRange(MIN_GAINED_EXP, MAX_GAINED_EXP);
 
         gainedExp += Math.floor(message.content.split(' ').length * MESSAGE_LENGTH_WEIGHT);
+
+        gainedExp = Math.clamp(gainedExp, 0, MAX_EXP_PER_MESSAGE);
 
         const memberData = await database.getData(message.author.id);
 
