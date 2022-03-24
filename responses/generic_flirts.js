@@ -12,7 +12,7 @@ module.exports = {
     ],
     responses: [
         ":heart::heart::heart:",
-        "Not to bad yourself!",
+        "Not too bad yourself!",
         ":kissing:"
     ],
     execute(message) {

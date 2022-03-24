@@ -19,6 +19,8 @@ const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith(
 
 const responseFiles = fs.readdirSync('./responses/').filter(file => file.endsWith('.js'));
 
+const profilePictures = fs.readdirSync('./Profile_Pictures/');
+
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
@@ -94,11 +96,31 @@ client.on('messageCreate', async message => {
 });
 
 client.once('guildMemberAdd', member => {
-    database.updateDatabase({id: member.user.id});
+    database.updateDatabase({id: member.user.id, exp: 3, love: 0});
 
     member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
 });
+
+setInterval(() => {
+    const date = new Date();
+
+    const runTime = {
+        hour: 7,
+        minute: 45
+    }
+
+    console.log(`${date.getHours()}:${date.getMinutes()}`);
+
+    if(date.getHours() != runTime.hour || date.getMinutes() != runTime.minute)
+        return;
+
+    const pfp = profilePictures.getRandomElement();
+
+    client.user.setAvatar(`./Profile_Pictures/${pfp}`);
+
+    console.log("SET CLIENT PFP!");
+}, 1000 * 60);
 
 //MUST BE LAST LINE
 client.login(process.env.BOT_TOKEN);
