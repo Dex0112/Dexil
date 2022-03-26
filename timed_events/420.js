@@ -3,8 +3,8 @@ const { client } = require('../main.js');
 module.exports = {
     name: "420",
     runtime: {
-        hour: 20,
-        minute: 56
+        hour: 4,
+        minute: 20
     },
     async execute() {
         const guild = await client.guilds.fetch('939667236786937896');
