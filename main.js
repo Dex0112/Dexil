@@ -14,12 +14,12 @@ const database = require('./database');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
+client.timedEvents = [];
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-
 const responseFiles = fs.readdirSync('./responses/').filter(file => file.endsWith('.js'));
+const timedEventFiles = fs.readdirSync('./timed_events/').filter(file => file.endsWith('.js'));
 
-const profilePictures = fs.readdirSync('./Profile_Pictures/');
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -35,12 +35,18 @@ for (const file of responseFiles) {
     }
 }
 
+for(const file of timedEventFiles) {
+    const timedEvent = require(`./timed_events/${file}`);
+
+    client.timedEvents.push(timedEvent);
+}
+
 client.once('ready', async () => {
     const guild = client.guilds.cache.get("939667236786937896");
     guild.members.fetch().then(members => {
         members.forEach(member => {
-            if(!member.roles.cache.has('945164718186852412'))
-                database.updateDatabase({id: member.user.id});
+            if (!member.roles.cache.has('945164718186852412'))
+                database.updateDatabase({ id: member.user.id });
         })
 
         console.log("Added everyone to database");
@@ -73,7 +79,7 @@ client.on('messageCreate', async message => {
         return;
     }
 
-    if(message.channel != 945730937432444998) {
+    if (message.channel != 945730937432444998) {
         const MIN_GAINED_EXP = 0;
         const MAX_GAINED_EXP = 10;
 
@@ -91,40 +97,35 @@ client.on('messageCreate', async message => {
 
         const expToNextLevel = helper.getExpToNextLevel(memberData.exp);
 
-        if(expToNextLevel <= gainedExp) {
+        if (expToNextLevel <= gainedExp) {
             message.reply(`\`\`${helper.getAuthorDisplayName(message)} has leveled up!\`\``);
         }
 
-        database.mutateData({id: message.author.id, exp: gainedExp, love: 0});
+        database.mutateData({ id: message.author.id, exp: gainedExp, love: 0 });
     }
 });
 
 client.once('guildMemberAdd', member => {
-    database.updateDatabase({id: member.user.id, exp: 3, love: 0});
+    database.updateDatabase({ id: member.user.id, exp: 3, love: 0 });
 
     member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
 });
 
 setInterval(() => {
+    //Three hours ahead
     const date = new Date();
 
-    //Three hours ahead
-    const runTime = {
-        hour: 7,
-        minute: 20
+    const time = {
+        hour: date.getHours() - 3,
+        minute: date.getMinutes()
     }
 
-    if(date.getHours() != runTime.hour || date.getMinutes() != runTime.minute)
-        return;
-
-    const pfp = profilePictures.shift();
-    profilePictures.push(pfp);
-
-    client.user.setAvatar(`./Profile_Pictures/${pfp}`);
-
-    console.log("SET CLIENT PFP!");
-}, 1000 * 60);
+    for(var i = 0; i < client.timedEvents.length; i++) {
+        if (client.timedEvents[i].runtime.toString() == time.toString())
+            return client.timedEvents[i].execute();
+    }
+}, 1000 * 10);
 
 //MUST BE LAST LINE
 client.login(process.env.BOT_TOKEN);
