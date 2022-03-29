@@ -111,7 +111,7 @@ setInterval(() => {
     const date = new Date();
 
     const time = {
-        hour: date.getHours() - 3,
+        hour: date.getHours(),
         minute: date.getMinutes()
     }
 
