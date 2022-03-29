@@ -9,6 +9,6 @@ module.exports = {
 
         const level = helper.calculateLevel(data.exp);
 
-        message.reply(`${helper.getAuthorDisplayName(message)} is level ${level}!`);
+        message.reply(`${helper.getAuthorDisplayName(message)} is level ${level} (${data.exp})!`);
     }
 }
