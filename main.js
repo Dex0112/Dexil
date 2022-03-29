@@ -19,8 +19,6 @@ client.profilePictures = fs.readdirSync('./profile_pictures/').shuffle();
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 const responseFiles = fs.readdirSync('./responses/').filter(file => file.endsWith('.js'));
 
-console.log(client.profilePictures);
-
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
@@ -106,7 +104,7 @@ client.once('guildMemberAdd', member => {
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
 });
 
-setInterval(() => {
+setInterval(async () => {
     //Three hours ahead
     const date = new Date();
 
@@ -115,17 +113,28 @@ setInterval(() => {
         minute: date.getMinutes()
     }
 
-    if(time.minute == 0) {
+    if (time.minute == 0) {
         try {
             const pfp = client.profilePictures.shift();
             client.profilePictures.push(pfp);
 
             client.user.setAvatar(`./profile_pictures/${pfp}`);
-        } catch(error) {
+        } catch (error) {
             console.log("Problem occured while changing pfp!");
         }
     }
 
+    if (Math.randomIntInRange(0, 75) == 0) {
+        client.guilds.cache.get('939667236786937896').members.fetch().then(members => {
+            members.forEach(member => {
+                if (member.roles.cache.some(role => role.name == 'Lucid Dreamer')) {
+                    member.user.send("Reality check time!!!");
+                    console.log("Sent");
+                } else
+                    console.log("Nope");
+            });
+        });
+    }
 }, 1000 * 60);
 
 //MUST BE LAST LINE
