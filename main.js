@@ -14,12 +14,12 @@ const database = require('./database');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
-client.timedEvents = [];
+client.profilePictures = fs.readdirSync('./profile_pictures/').shuffle();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 const responseFiles = fs.readdirSync('./responses/').filter(file => file.endsWith('.js'));
-const timedEventFiles = fs.readdirSync('./timed_events/').filter(file => file.endsWith('.js'));
 
+console.log(client.profilePictures);
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -33,12 +33,6 @@ for (const file of responseFiles) {
     for (const trigger of response.triggers) {
         client.responses.set(trigger.toLowerCase(), response);
     }
-}
-
-for(const file of timedEventFiles) {
-    const timedEvent = require(`./timed_events/${file}`);
-
-    client.timedEvents.push(timedEvent);
 }
 
 client.once('ready', async () => {
@@ -121,11 +115,18 @@ setInterval(() => {
         minute: date.getMinutes()
     }
 
-    for(var i = 0; i < client.timedEvents.length; i++) {
-        if (client.timedEvents[i].runtime.toString() == time.toString())
-            return client.timedEvents[i].execute();
+    if(time.minute == 0) {
+        try {
+            const pfp = client.profilePictures.shift();
+            client.profilePictures.push(pfp);
+
+            client.user.setAvatar(`./profile_pictures/${pfp}`);
+        } catch(error) {
+            console.log("Problem occured while changing pfp!");
+        }
     }
-}, 1000 * 10);
+
+}, 1000 * 60);
 
 //MUST BE LAST LINE
 client.login(process.env.BOT_TOKEN);

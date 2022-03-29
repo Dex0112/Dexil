@@ -29,6 +29,16 @@ Array.prototype.getRandomElement = function() {
     return this[Math.randomIntInRange(0, this.length)];
 }
 
+Array.prototype.shuffle = function() {
+    const shuffled = this.sort((a, b) => 0.5 - Math.random());
+
+    for(var i = 0; i < shuffled; i++) {
+        this[i] = shuffled[i];
+    }
+
+    return shuffled;
+}
+
 Math.randomIntInRange = function(min = Number(), max = Number()) {
     return Math.floor(Math.random() * (max - min) + min);
 }
