@@ -26,7 +26,7 @@ module.exports = {
                 }
 
                 if (data.exp != null)
-                    connection.query(`UPDATE user_data SET exp = ${data.exp} WHERE ID = '${data.id}'`)
+                    connection.query(`UPDATE user_data SET exp = ${data.exp} WHERE id = '${data.id}'`)
                 if (data.love != null)
                     connection.query(`UPDATE user_data SET love = ${data.love} WHERE id = '${data.id}'`);
             } catch (error) {
