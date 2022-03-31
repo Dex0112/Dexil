@@ -15,6 +15,6 @@ module.exports = {
 
         const memberData = await database.getData(member.user.id.toString());
 
-        message.reply(`${helper.getDisplayName(member)} is level ${helper.calculateLevel(memberData.exp)} and has ${memberData.love} love from Dexil!`);
+        message.reply(`${helper.getDisplayName(member)} is level ${helper.calculateLevel(memberData.exp)} (${memberData.exp}) and has ${memberData.love} love from Dexil!`);
     }
 }

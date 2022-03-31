@@ -6,7 +6,6 @@ module.exports = {
             message.reply("Must be in bot-spam for this command!");
             return;
         }
-        
 
         for(var i = 0; i <= 15; i++) {
             message.channel.send("YO");

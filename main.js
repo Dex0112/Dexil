@@ -124,7 +124,7 @@ setInterval(async () => {
         }
     }
 
-    if (Math.randomIntInRange(0, 75) == 0) {
+    if (Math.randomIntInRange(0, 350) == 0) {
         client.guilds.cache.get('939667236786937896').members.fetch().then(members => {
             members.forEach(member => {
                 if (member.roles.cache.some(role => role.name == 'Lucid Dreamer')) {
