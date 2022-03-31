@@ -17,7 +17,7 @@ module.exports = {
 
         const orderedMemberDatas = await database.getValuesOrdered(leaderboardKey, 'DESC');
 
-        const leaderboardLength = 3;
+        const leaderboardLength = 5;
 
         var reply = "```\n";
 
