@@ -124,16 +124,18 @@ setInterval(async () => {
         }
     }
 
-    if (Math.randomIntInRange(0, 350) == 0) {
-        client.guilds.cache.get('939667236786937896').members.fetch().then(members => {
-            members.forEach(member => {
-                if (member.roles.cache.some(role => role.name == 'Lucid Dreamer')) {
-                    member.user.send("Reality check time!!!");
-                    console.log("Sent");
-                } else
-                    console.log("Nope");
+    if(time.mintute == 30) {
+        if(time.hour >= 3 && time.hour <= 21) {
+            client.guilds.cache.get('939667236786937896').members.fetch().then(members => {
+                members.forEach(member => {
+                    if (member.roles.cache.some(role => role.name == 'Lucid Dreamer')) {
+                        member.user.send("Reality check time!!!");
+                        console.log("Sent");
+                    } else
+                        console.log("Nope");
+                });
             });
-        });
+        }
     }
 }, 1000 * 60);
 
