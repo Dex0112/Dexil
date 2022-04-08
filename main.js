@@ -124,7 +124,7 @@ setInterval(async () => {
         }
     }
 
-    if(time.mintute == 30) {
+    if(time.minute == 30) {
         if(time.hour >= 3 && time.hour <= 21) {
             client.guilds.cache.get('939667236786937896').members.fetch().then(members => {
                 members.forEach(member => {
