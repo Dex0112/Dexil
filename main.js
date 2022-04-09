@@ -139,7 +139,7 @@ setInterval(() => {
             });
         }
     }
-}, 1000 * 3);
+}, 1000 * 60);
 
 //MUST BE LAST LINE
 client.login(process.env.BOT_TOKEN);
