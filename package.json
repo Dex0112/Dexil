@@ -8,6 +8,7 @@
     "devStart": "nodemon"
   },
   "dependencies": {
+    "@js-temporal/polyfill": "^0.4.0",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "mysql2": "^2.3.3"

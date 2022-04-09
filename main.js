@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const { Temporal } = require('@js-temporal/polyfill');
+
 const Discord = require('discord.js');
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] });
@@ -104,16 +106,15 @@ client.once('guildMemberAdd', member => {
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
 });
 
-setInterval(async () => {
+setInterval(() => {
     //Three hours ahead
-    const date = new Date();
+    const timeZone = 'America/New_York';
+    const now = Temporal.Now.zonedDateTimeISO(timeZone);
 
-    const time = {
-        hour: date.getHours(),
-        minute: date.getMinutes()
-    }
+    //in minutes
+    const realityCheckFrequency = 30; 
 
-    if (time.minute == 0) {
+    if (now.minute == 0) {
         try {
             const pfp = client.profilePictures.shift();
             client.profilePictures.push(pfp);
@@ -124,20 +125,21 @@ setInterval(async () => {
         }
     }
 
-    if(time.minute == 30) {
-        if(time.hour >= 3 && time.hour <= 21) {
+    console.log(now.toPlainTime());
+
+    if(now.minute % realityCheckFrequency == 0) {
+        if(now.hour >= 6 && now.hour <= 24) {
             client.guilds.cache.get('939667236786937896').members.fetch().then(members => {
                 members.forEach(member => {
                     if (member.roles.cache.some(role => role.name == 'Lucid Dreamer')) {
                         member.user.send("Reality check time!!!");
                         console.log("Sent");
-                    } else
-                        console.log("Nope");
+                    }
                 });
             });
         }
     }
-}, 1000 * 60);
+}, 1000 * 3);
 
 //MUST BE LAST LINE
 client.login(process.env.BOT_TOKEN);
