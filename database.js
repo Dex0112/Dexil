@@ -14,7 +14,7 @@ const connection = mysql.createConnection(database);
 
 module.exports = {
     updateDatabase: async function (data = {}) {
-        connection.query(`SELECT COUNT(id) AS user_count FROM user_data where id = '${data.id}'`, (err, results) => {
+        connection.query(`SELECT COUNT(id) AS user_count FROM user_data WHERE id = '${data.id}'`, (err, results) => {
             if (err != null) {
                 console.log(err);
                 return;
