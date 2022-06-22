@@ -116,8 +116,6 @@ async function isValidMessage(message) {
 
     const spamCheckRange = 5;
     const maxSpamCount = 2;
-
-    console.log("Validating message");
     
     if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
         console.log("Message too short");
@@ -126,8 +124,8 @@ async function isValidMessage(message) {
 
 
     var isSpam = false;
-    await message.channel.messages.fetch({ limit: 5 }).then(messagesRaw => {
-        console.log("here")
+    
+    await message.channel.messages.fetch({ limit: spamCheckRange }).then(messagesRaw => {
 
         const messages = Array.from(messagesRaw.values());
         
@@ -136,14 +134,11 @@ async function isValidMessage(message) {
                 spamCounter++;
             
             if(spamCounter >= maxSpamCount) {
-                console.log("is spam");
                 isSpam = true;
                 break;
             }
         }
     });
-
-    console.log("HERE");
 
     return !isSpam;
 }
