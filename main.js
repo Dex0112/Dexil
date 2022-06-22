@@ -76,7 +76,7 @@ client.on('messageCreate', async message => {
 
     const isValid = await isValidMessage(message);
 
-    if(!isValid && message.channel.id != '945730937432444998')
+    if(!isValid)
         return message.delete();
 
     if (message.channel != 945730937432444998)
@@ -116,7 +116,12 @@ async function isValidMessage(message) {
 
     const spamCheckRange = 5;
     const maxSpamCount = 2;
+
+    const unregulatedChannels = ['945730937432444998', '939689063475208313']
     
+    if(unregulatedChannels.includes(message.channel.id))
+        return true;
+
     if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
         console.log("Message too short");
         return false;
