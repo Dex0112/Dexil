@@ -13,6 +13,7 @@ const prefix = '-';
 const fs = require('fs');
 const helper = require('./helper.js');
 const database = require('./database');
+const { text } = require('stream/consumers');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
@@ -73,31 +74,79 @@ client.on('messageCreate', async message => {
         return;
     }
 
-    if (message.channel != 945730937432444998) {
-        const MIN_GAINED_EXP = 0;
-        const MAX_GAINED_EXP = 10;
+    const isValid = await isValidMessage(message);
 
-        const MAX_EXP_PER_MESSAGE = 17;
+    if(!isValid)
+        message.delete();
 
-        const MESSAGE_LENGTH_WEIGHT = .2;
-
-        var gainedExp = Math.randomIntInRange(MIN_GAINED_EXP, MAX_GAINED_EXP);
-
-        gainedExp += Math.floor(message.content.split(' ').length * MESSAGE_LENGTH_WEIGHT);
-
-        gainedExp = Math.clamp(gainedExp, 0, MAX_EXP_PER_MESSAGE);
-
-        const memberData = await database.getData(message.author.id);
-
-        const expToNextLevel = helper.getExpToNextLevel(memberData.exp);
-
-        if (expToNextLevel <= gainedExp) {
-            message.reply(`\`\`${helper.getAuthorDisplayName(message)} has leveled up!\`\``);
-        }
-
-        database.mutateData({ id: message.author.id, exp: gainedExp, love: 0 });
-    }
+    if (message.channel != 945730937432444998)
+        giveExp(message);
 });
+
+async function giveExp(message) {
+    const MIN_GAINED_EXP = 0;
+    const MAX_GAINED_EXP = 10;
+
+    const MAX_EXP_PER_MESSAGE = 17;
+
+    const MESSAGE_LENGTH_WEIGHT = .2;
+
+    var gainedExp = Math.randomIntInRange(MIN_GAINED_EXP, MAX_GAINED_EXP);
+
+    gainedExp += Math.floor(message.content.split(' ').length * MESSAGE_LENGTH_WEIGHT);
+
+    gainedExp = Math.clamp(gainedExp, 0, MAX_EXP_PER_MESSAGE);
+
+    const memberData = await database.getData(message.author.id);
+
+    if(memberData == null)
+        return;
+
+    const expToNextLevel = helper.getExpToNextLevel(memberData.exp);
+
+    if (expToNextLevel <= gainedExp) {
+        message.reply(`\`\`${helper.getAuthorDisplayName(message)} has leveled up!\`\``);
+    }
+
+    database.mutateData({ id: message.author.id, exp: gainedExp, love: 0 });
+}
+
+async function isValidMessage(message) {
+    const minMessageLength = 2;
+
+    const spamCheckRange = 5;
+    const maxSpamCount = 2;
+
+    console.log("Validating message");
+    
+    if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
+        console.log("Message too short");
+        return false;
+    }
+
+
+    var isSpam = false;
+    await message.channel.messages.fetch({ limit: 5 }).then(messagesRaw => {
+        console.log("here")
+
+        const messages = Array.from(messagesRaw.values());
+        
+        for(var i = 1, spamCounter = 0; i < messages.length; i++) {
+            if(messages[i].content.toLowerCase() == messages[0].content.toLowerCase())
+                spamCounter++;
+            
+            if(spamCounter >= maxSpamCount) {
+                console.log("is spam");
+                isSpam = true;
+                break;
+            }
+        }
+    });
+
+    console.log("HERE");
+
+    return !isSpam;
+}
 
 client.once('guildMemberAdd', member => {
     database.updateDatabase({ id: member.user.id, exp: 3, love: 0 });
