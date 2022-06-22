@@ -1,9 +1,19 @@
 module.exports = {
     name: "role",
-    description: "Gives requested roles (limited)",
+    description: "Gives or removes roll. Leave argument empy to see list of all eligible roles.",
     execute(message, args) {
-        if(args[0] == null)
-            return message.reply("Please insert a valid role");
+        if(args[0] == null) {
+            var reply = "Eligible roles:\n";
+
+            const highestPosition = message.guild.roles.cache.find(r => r.id === '945164718186852412').position;
+
+            message.guild.roles.cache.each(role => {
+                if(!message.member.roles.cache.has(role.id) && role.position < highestPosition)
+                    reply += `${role.name}\n`;
+            });
+
+            return message.reply("```" + reply + "```");
+        }
         
         const role = message.guild.roles.cache.find(r => r.name === args[0].replace("_", " "));
 

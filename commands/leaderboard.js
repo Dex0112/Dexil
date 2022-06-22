@@ -17,6 +17,9 @@ module.exports = {
 
         const orderedMemberDatas = await database.getValuesOrdered(leaderboardKey, 'DESC');
 
+        if(orderedMemberDatas == null)
+            return message.reply("Leaderboards currently unavailable.");
+
         const leaderboardLength = 5;
 
         var reply = "```\n";

@@ -10,7 +10,28 @@ const database = {
     port: process.env.DB_PORT
 }
 
-const connection = mysql.createConnection(database);
+var connection;
+
+function handleDisconnect() {
+    console.log("Disconnected");
+    connection = mysql.createConnection(database);
+
+    connection.connect((error) => {
+        if(error) {
+            console.log("Error when connecting to db:", error);
+            setTimeout(handleDisconnect, 120 * 1000);
+        }
+    });
+    
+    connection.on('error', (error) => {
+        console.log("db error", error);
+        if(error.code === "PROTOCOL_CONNECTION_LOST") {
+            handleDisconnect();
+        }
+    });
+}
+
+handleDisconnect();
 
 module.exports = {
     updateDatabase: async function (data = {}) {
