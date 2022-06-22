@@ -76,8 +76,8 @@ client.on('messageCreate', async message => {
 
     const isValid = await isValidMessage(message);
 
-    if(!isValid)
-        message.delete();
+    if(!isValid && message.channel.id != '945730937432444998')
+        return message.delete();
 
     if (message.channel != 945730937432444998)
         giveExp(message);
@@ -124,7 +124,7 @@ async function isValidMessage(message) {
 
 
     var isSpam = false;
-    
+
     await message.channel.messages.fetch({ limit: spamCheckRange }).then(messagesRaw => {
 
         const messages = Array.from(messagesRaw.values());
