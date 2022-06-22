@@ -117,15 +117,13 @@ async function isValidMessage(message) {
     const spamCheckRange = 5;
     const maxSpamCount = 2;
 
-    const unregulatedChannels = ['945730937432444998', '939689063475208313']
+    const unregulatedChannels = ['945730937432444998']
     
     if(unregulatedChannels.includes(message.channel.id))
         return true;
 
-    if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
-        console.log("Message too short");
+    if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false && message.attachments.size < 0)
         return false;
-    }
 
 
     var isSpam = false;
