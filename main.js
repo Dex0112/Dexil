@@ -129,7 +129,7 @@ async function isValidMessage(message) {
     const messageCollection = await message.channel.messages.fetch({ limit: spamCheckRange });
     const messages = Array.from(messageCollection.values());
 
-    for(var i = 0, spamCounter = 0; i < messages.length; i++) {
+    for(var i = 1, spamCounter = 0; i < messages.length; i++) {
         if(messages[i].content.toLowerCase() == messages[0].content.toLowerCase())
             spamCounter++;
         
