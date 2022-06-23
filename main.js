@@ -143,6 +143,9 @@ async function isValidMessage(message) {
 client.once('guildMemberAdd', member => {
     database.updateDatabase({ id: member.user.id, exp: 3, love: 0 });
 
+    member.roles.add('946977499647197245');
+    member.roles.add('946977499647197245');
+
     member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
     setTimeout(() => {
@@ -150,13 +153,23 @@ client.once('guildMemberAdd', member => {
     }, 10000);
 });
 
-setInterval(() => {
-    //Three hours ahead
+setInterval(async () => {
     const timeZone = 'America/New_York';
     const now = Temporal.Now.zonedDateTimeISO(timeZone);
 
-    //in minutes
-    const realityCheckFrequency = 30; 
+    const realityCheckFrequency = 30;
+
+    if(now.hour == 3 && now.minute == 0) {
+        const compliments = ['Lookin good my dude!', 'Hey sexy!', 'You are great at video games!', 'You are very, very cool!'];
+
+        const complimenteeRole = await client.guilds.cache.get('939667236786937896').roles.fetch('989003511968714812');
+
+        const complimentees = Array.from(complimenteeRole.members.values());
+    
+        for(var i = 0; i < complimentees.length; i++) {
+            complimentees[i].user.send(compliments.getRandomElement() + "\n(if you wish to stop receiving daily compliments from me, visit The Bois and do ``-role Complimentee``)");
+        }
+    }
 
     if (now.minute == 0) {
         try {
@@ -168,8 +181,6 @@ setInterval(() => {
             console.log("Problem occured while changing pfp!");
         }
     }
-
-    console.log(now.toPlainTime());
 
     if(now.minute % realityCheckFrequency == 0) {
         if(now.hour >= 6 && now.hour <= 24) {
@@ -183,7 +194,7 @@ setInterval(() => {
             });
         }
     }
-}, 1000 * 60);
+}, 1000 * 1);
 
 //MUST BE LAST LINE
 client.login(process.env.BOT_TOKEN);
