@@ -124,26 +124,20 @@ async function isValidMessage(message) {
 
     if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false && message.attachments.size == 0)
         return false;
+    
+    
+    const messageCollection = await message.channel.messages.fetch({ limit: spamCheckRange });
+    const messages = Array.from(messageCollection.values());
 
-
-    var isSpam = false;
-
-    await message.channel.messages.fetch({ limit: spamCheckRange }).then(messagesRaw => {
-
-        const messages = Array.from(messagesRaw.values());
+    for(var i = 0, spamCounter = 0; i < messages.length; i++) {
+        if(messages[i].content.toLowerCase() == messages[0].content.toLowerCase())
+            spamCounter++;
         
-        for(var i = 1, spamCounter = 0; i < messages.length; i++) {
-            if(messages[i].content.toLowerCase() == messages[0].content.toLowerCase())
-                spamCounter++;
-            
-            if(spamCounter >= maxSpamCount) {
-                isSpam = true;
-                break;
-            }
-        }
-    });
+        if(spamCounter >= maxSpamCount)
+            return false;
+    }
 
-    return !isSpam;
+    return true;
 }
 
 client.once('guildMemberAdd', member => {
@@ -151,6 +145,9 @@ client.once('guildMemberAdd', member => {
 
     member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
+    setTimeout(() => {
+        member.user.send("But, if you are going to stay, in the server, you can do -role to see a list of the available roles and -help to get a list of all the commands with descriptions of what they do. Enjoy the server!");
+    }, 10000);
 });
 
 setInterval(() => {
