@@ -157,9 +157,11 @@ setInterval(async () => {
     const timeZone = 'America/New_York';
     const now = Temporal.Now.zonedDateTimeISO(timeZone);
 
+    console.log(now.hour);
+
     const realityCheckFrequency = 30;
 
-    if(now.hour == 3 && now.minute == 0) {
+    if(now.second == 0 && now.hour == 15 && now.minute == 4) {
         const compliments = ['Lookin good my dude!', 'Hey sexy!', 'You are great at video games!', 'You are very, very cool!'];
 
         const complimenteeRole = await client.guilds.cache.get('939667236786937896').roles.fetch('989003511968714812');
@@ -171,7 +173,7 @@ setInterval(async () => {
         }
     }
 
-    if (now.minute == 0) {
+    if (now.second == 0 && now.minute == 0) {
         try {
             const pfp = client.profilePictures.shift();
             client.profilePictures.push(pfp);
@@ -182,7 +184,7 @@ setInterval(async () => {
         }
     }
 
-    if(now.minute % realityCheckFrequency == 0) {
+    if(now.second == 0 && now.minute % realityCheckFrequency == 0) {
         if(now.hour >= 6 && now.hour <= 24) {
             client.guilds.cache.get('939667236786937896').members.fetch().then(members => {
                 members.forEach(member => {
