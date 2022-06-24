@@ -79,6 +79,9 @@ module.exports = {
 
         const data = await this.getData(dataMutation.id);
 
+        if(data == null)
+            return;
+
         const newData = {
             id: dataMutation.id,
             exp: data.exp + dataMutation.exp,
