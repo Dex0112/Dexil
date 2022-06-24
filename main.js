@@ -82,6 +82,16 @@ client.on('messageCreate', async message => {
         giveExp(message);
 });
 
+client.once('guildMemberAdd', member => {
+    database.updateDatabase({ id: member.user.id, exp: 3, love: 0 });
+
+    member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
+    member.user.send("GET OUT WHILE YOU STILL CAN!!!");
+    setTimeout(() => {
+        member.user.send("But, if you are going to stay, in the server, you can do -role to see a list of the available roles and -help to get a list of all the commands with descriptions of what they do. Enjoy the server!");
+    }, 10000);
+});
+
 async function giveExp(message) {
     const MIN_GAINED_EXP = 0;
     const MAX_GAINED_EXP = 10;
