@@ -122,7 +122,7 @@ async function validateMessage(message) {
         return;
 
     if(message.content.length < minMessageLength && message.attachments.size == 0 && /^\d+$/.test(message.content) == false) {
-        disiplinMember(message.member);
+        disciplineMember(message.member);
         return message.delete();
     }
     
@@ -135,13 +135,13 @@ async function validateMessage(message) {
             spamCounter++;
         
         if(spamCounter >= maxSpamCount) {
-            disiplinMember(message.member);
+            disciplineMember(message.member);
             return message.delete();
         }
     }
 }
 
-function disiplinMember(member) {
+function disciplineMember(member) {
     const maxOffenses = 3;
     const offenseLength = 3;
     const timeoutLength = 15;
