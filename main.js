@@ -78,8 +78,8 @@ client.on('messageCreate', async message => {
 
     validateMessage(message);
 
-    if (message.channel != 945730937432444998)
-        giveExp(message);
+    //  if (message.channel != 945730937432444998)
+    //     giveExp(message);
 });
 
 client.once('guildMemberAdd', member => {
@@ -131,7 +131,10 @@ async function validateMessage(message) {
     if(unregulatedChannels.includes(message.channel.id))
         return;
 
-    if(message.content.length < minMessageLength && message.attachments.size == 0 && /^\d+$/.test(message.content) == false) {
+    if(message.attachments.size != 0)
+        return;
+
+    if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
         disciplineMember(message.member);
         return message.delete();
     }
