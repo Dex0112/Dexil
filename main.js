@@ -157,8 +157,6 @@ setInterval(async () => {
     const timeZone = 'America/New_York';
     const now = Temporal.Now.zonedDateTimeISO(timeZone);
 
-    console.log(now.hour);
-
     const realityCheckFrequency = 30;
 
     if(now.second == 0 && now.hour == 15 && now.minute == 4) {
