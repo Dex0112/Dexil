@@ -5,7 +5,7 @@ module.exports = {
         if(args[0] == null) {
             var reply = "Eligible roles:\n";
 
-            const highestPosition = message.guild.roles.cache.find(r => r.id === '945164718186852412').position;
+            const highestPosition = message.guild.roles.cache.find(r => r.id === '989801024170627092').position;
 
             message.guild.roles.cache.each(role => {
                 if(!message.member.roles.cache.has(role.id) && role.position < highestPosition)

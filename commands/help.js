@@ -1,4 +1,4 @@
-const main = require("../main");
+const { client } = require("../main.js");
 
 module.exports = {
     name: "help",
@@ -9,9 +9,8 @@ module.exports = {
 
         var reply = "";
 
-        const commands = Array.from(main.client.commands.values());
+        const commands = Array.from(client.commands.values());
         
-        //foreach loop no work here ;(
         for(var i = 0; i < commands.length; i++) {
             const command = commands[i];
 

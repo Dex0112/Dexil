@@ -8,12 +8,10 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 
 module.exports.client = client;
 
-const prefix = '-';
-
 const fs = require('fs');
 const helper = require('./helper.js');
 const database = require('./database');
-const { text } = require('stream/consumers');
+const { off } = require('process');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
@@ -21,6 +19,10 @@ client.profilePictures = fs.readdirSync('./profile_pictures/').shuffle();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 const responseFiles = fs.readdirSync('./responses/').filter(file => file.endsWith('.js'));
+
+const prefix = '-';
+
+var offenders = {};
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -74,10 +76,7 @@ client.on('messageCreate', async message => {
         return;
     }
 
-    const isValid = await isValidMessage(message);
-
-    if(!isValid)
-        return message.delete();
+    validateMessage(message);
 
     if (message.channel != 945730937432444998)
         giveExp(message);
@@ -111,19 +110,21 @@ async function giveExp(message) {
     database.mutateData({ id: message.author.id, exp: gainedExp, love: 0 });
 }
 
-async function isValidMessage(message) {
+async function validateMessage(message) {
     const minMessageLength = 2;
 
     const spamCheckRange = 5;
     const maxSpamCount = 2;
 
     const unregulatedChannels = ['945730937432444998'];
-    
-    if(unregulatedChannels.includes(message.channel.id))
-        return true;
 
-    if(message.content.length < minMessageLength && /^\d+$/.test(message.content) == false && message.attachments.size == 0)
-        return false;
+    if(unregulatedChannels.includes(message.channel.id))
+        return;
+
+    if(message.content.length < minMessageLength && message.attachments.size == 0 && /^\d+$/.test(message.content) == false) {
+        disiplinMember(message.member);
+        return message.delete();
+    }
     
     
     const messageCollection = await message.channel.messages.fetch({ limit: spamCheckRange });
@@ -133,25 +134,30 @@ async function isValidMessage(message) {
         if(messages[i].content.toLowerCase() == messages[0].content.toLowerCase())
             spamCounter++;
         
-        if(spamCounter >= maxSpamCount)
-            return false;
+        if(spamCounter >= maxSpamCount) {
+            disiplinMember(message.member);
+            return message.delete();
+        }
     }
-
-    return true;
 }
 
-client.once('guildMemberAdd', member => {
-    database.updateDatabase({ id: member.user.id, exp: 3, love: 0 });
+function disiplinMember(member) {
+    const maxOffenses = 3;
+    const offenseLength = 3;
+    const timeoutLength = 15;
 
-    member.roles.add('946977499647197245');
-    member.roles.add('946977499647197245');
+    offenders[member.id] = offenders[member.id] + 1 || 1;
 
-    member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
-    member.user.send("GET OUT WHILE YOU STILL CAN!!!");
-    setTimeout(() => {
-        member.user.send("But, if you are going to stay, in the server, you can do -role to see a list of the available roles and -help to get a list of all the commands with descriptions of what they do. Enjoy the server!");
-    }, 10000);
-});
+    if(offenders[member.id] >= maxOffenses) {
+        member.timeout(timeoutLength * 60 * 1000).catch(err => {
+            console.log("Could not timeout user!", err);
+        });
+    }
+
+    setInterval(() => {
+        offenders[member.id] = offenders[member.id] - 1;
+    }, offenseLength * 60 * 1000);
+}
 
 setInterval(async () => {
     const timeZone = 'America/New_York';
