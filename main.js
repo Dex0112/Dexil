@@ -163,7 +163,15 @@ function disciplineMember(member) {
 
     if(offenders[member.id] >= maxOffenses) {
         member.timeout(timeoutLength * 60 * 1000).catch(err => {
-            console.log("Could not timeout user!", err);
+            console.log(`Could not timeout ${member}!`);
+        });
+
+        console.log("here");
+
+        client.guilds.cache.get('939667236786937896').roles.fetch('939667378948681730').then(role => {
+            role.members.forEach(roleMember => {
+                roleMember.send(`${roleMember} was timed out!`);
+            })
         });
     }
 
