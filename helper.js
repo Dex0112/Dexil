@@ -1,3 +1,5 @@
+const { client } = require('./main')
+
 module.exports = { 
     getAuthorDisplayName: (message) => {
         const member = message.guild.members.cache.get(message.author.id);
@@ -22,6 +24,14 @@ module.exports = {
         const nextLevelExp = ((currentLevel + 1) * (currentLevel + 1)) * 3;
 
         return nextLevelExp - exp;
+    },
+
+    getMembersInRole: async (roleID) => {
+        const role = await client.guilds.cache.get('939667236786937896').roles.fetch(roleID);
+
+        const members = Array.from(role.members.values());
+
+        return members;
     }
 }
 
@@ -30,7 +40,7 @@ Array.prototype.getRandomElement = function() {
 }
 
 Array.prototype.shuffle = function() {
-    const shuffled = this.sort((a, b) => 0.5 - Math.random());
+    const shuffled = this.sort(() => 0.5 - Math.random());
 
     for(var i = 0; i < shuffled; i++) {
         this[i] = shuffled[i];
