@@ -78,8 +78,8 @@ client.on('messageCreate', async message => {
 
     validateMessage(message);
 
-    //  if (message.channel != 945730937432444998)
-    //     giveExp(message);
+    if (message.channel != 945730937432444998)
+        giveExp(message);
 });
 
 client.once('guildMemberAdd', member => {
@@ -170,7 +170,7 @@ function disciplineMember(member) {
 
         client.guilds.cache.get('939667236786937896').roles.fetch('939667378948681730').then(role => {
             role.members.forEach(roleMember => {
-                roleMember.send(`${roleMember} was timed out!`);
+                roleMember.send(`${member} was timed out!`);
             })
         });
     }
