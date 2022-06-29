@@ -65,13 +65,10 @@ client.disciplineMember = (member) => {
             console.log(`Could not timeout ${member}!`);
         });
 
-        member.send("You have been timed out for " + timeoutLength + " mintues. Dm a dev if you would like this to be removed. Stay in school!");
-
-        console.log("here");
-
         client.guilds.cache.get('939667236786937896').roles.fetch('939667378948681730').then(role => {
             role.members.forEach(roleMember => {
                 roleMember.send(`${member} was timed out!`);
+                console.log(`${roleMember}`);
             })
         });
     }
