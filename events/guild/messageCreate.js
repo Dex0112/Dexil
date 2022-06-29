@@ -1,5 +1,3 @@
-const { client } = require('./../../main')
-
 module.exports = (Discord, client, message) => {
     const prefix = '-';
 
