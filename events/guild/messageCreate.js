@@ -13,7 +13,7 @@ module.exports = (Discord, client, message) => {
         const command = client.commands.get(commandKey);
 
         if(command)
-            command.execute(message, args);
+            return command.execute(message, args);
     }
 
     const response = client.responses.get(message.content.toLowerCase());
