@@ -118,9 +118,7 @@ setInterval(() => {
     const now = Temporal.Now.zonedDateTimeISO(timeZone);
 
     for (const event of client.timeEvents) {
-        //const event = require(`./time_events/${eventFile}`);
-        if (event.isTimeToExecute(now))
-            event.execute();
+        event.tryExecute(now);
     }
 }, 1000 * 60)
 
