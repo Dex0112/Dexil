@@ -12,7 +12,7 @@ module.exports = {
                     reply += `${role.name}\n`;
             });
 
-            return message.reply("```" + reply + "```");
+            return message.reply("``" + reply + "``");
         }
         
         const role = message.guild.roles.cache.find(r => r.name === args[0].replace("_", " "));
