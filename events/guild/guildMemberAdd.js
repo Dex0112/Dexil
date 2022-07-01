@@ -6,6 +6,6 @@ module.exports = (Discord, client, member) => {
     member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
     setTimeout(() => {
-        member.user.send("But, if you are going to stay, in the server, you can do -role to see a list of the available roles and -help to get a list of all the commands with descriptions of what they do. Enjoy the server!");
+        member.user.send("But, if you are going to stay, in the server, you can do ``-role`` to see a list of the available roles and ``-help`` to get a list of all the commands with descriptions of what they do. Enjoy the server!");
     }, 10000);
 }

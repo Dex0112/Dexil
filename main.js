@@ -19,6 +19,8 @@ client.profilePictures = fs.readdirSync('./profile_pictures/').shuffle();
 
 client.offenders = {};
 
+client.commandPrefix = '-';
+
 client.validateMessage = async (message) => {
     const minMessageLength = 2;
 
@@ -27,7 +29,7 @@ client.validateMessage = async (message) => {
 
     const unregulatedChannels = ['945730937432444998', '939745999537176657'];
 
-    if(message.content.startsWith('-'))
+    if(message.content.startsWith(this.commandPrefix))
         return;
 
     if (unregulatedChannels.includes(message.channel.id))

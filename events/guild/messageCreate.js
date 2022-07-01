@@ -1,5 +1,5 @@
 module.exports = (Discord, client, message) => {
-    const prefix = '-';
+    const prefix = client.commandPrefix;
 
     if(message.author.bot) return;
 
@@ -11,7 +11,9 @@ module.exports = (Discord, client, message) => {
         const command = client.commands.get(commandKey);
 
         if(command)
-            return command.execute(message, args);
+            command.execute(message, args);
+        else
+            message.reply("This is not a command do ``-help`` to get a list of commands!");
     }
 
     const response = client.responses.get(message.content.toLowerCase());
