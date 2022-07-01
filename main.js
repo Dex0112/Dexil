@@ -25,7 +25,10 @@ client.validateMessage = async (message) => {
     const spamCheckRange = 5;
     const maxSpamCount = 2;
 
-    const unregulatedChannels = ['945730937432444998'];
+    const unregulatedChannels = ['945730937432444998', '939745999537176657'];
+
+    if(message.content.startsWith('-'))
+        return;
 
     if (unregulatedChannels.includes(message.channel.id))
         return;

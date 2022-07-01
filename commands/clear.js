@@ -6,7 +6,7 @@ module.exports = {
             return message.reply("You do not have permission to complete this command!");
 
         if(!args[0]) 
-            args[0] = 99;
+            args[0] = 1;
         if(isNaN(args[0]))
             return message.reply("Please enter a real number!")
 
