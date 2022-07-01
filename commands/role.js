@@ -15,7 +15,7 @@ module.exports = {
             return message.reply("```" + reply + "```");
         }
         
-        const role = message.guild.roles.cache.find(r => r.name === args[0].replace("_", " "));
+        const role = message.guild.roles.cache.find(r => r.name.toLowerCase() === args[0].toLowerCase().replace("_", " "));
 
         if(role == null)
             return message.reply("Role does not exist! Do ``-role`` with no arguments to get a list of eligible roles for you!");
