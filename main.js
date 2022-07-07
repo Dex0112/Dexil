@@ -11,6 +11,7 @@ module.exports.client = client;
 
 const fs = require('fs');
 const database = require('./database');
+const helper = require('./helper');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
@@ -69,12 +70,11 @@ client.disciplineMember = (member) => {
         member.timeout(timeoutLength * 60 * 1000).catch(err => {
             console.log(`Could not timeout ${member}!`);
         });
-
-        client.guilds.cache.get('939667236786937896').roles.fetch('939667378948681730').then(role => {
-            role.members.forEach(roleMember => {
+        
+        helper.getMembersInRole('939667236786937896').then(members => {
+            for(const roleMember in members) {
                 roleMember.send(`${member} was timed out!`);
-                console.log(`${roleMember}`);
-            })
+            }
         });
     }
 

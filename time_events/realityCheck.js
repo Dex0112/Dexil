@@ -1,9 +1,9 @@
 const helper = require('../helper');
 
 module.exports = {
-    tryExecute(time) {
-        const eligableHours = { startHour: 7, endHour: 24 }
+    eligableHours: { startHour: 7, endHour: 24 },
 
+    tryExecute(time) {
         const realityCheckFrequency = 30;
 
         if(time.hour < eligableHours.startHour && time.hour > eligableHours.endHour)
