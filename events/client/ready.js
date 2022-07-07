@@ -1,4 +1,3 @@
-
 module.exports = (Discord, client) => {
     const database = require("./../../database");
     const guild = client.guilds.cache.get("939667236786937896");

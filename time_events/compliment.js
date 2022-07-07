@@ -28,7 +28,8 @@ module.exports = {
         "Ahh! My lenses! Stop glowing so bright :wink:",
         "Prince charming has nothing on you!",
         "I like you so much I wrote you a poem- \nI will laugh when you laugh. \nI will cry when you cry. \nI will tell you, you're lovely, \nand that is no lie. \n\nI will join you for lunch, \nand we'll share a dessert, \nas we catch up on gossip, \n and dish all that dirt. \n\nI will keep all your secret, \nI know you'll keep mine, \ntill were old, grey, and wrinkled, \ntill the end of all time\n\nTo be your best friend, \nI'll be all that and more. \nI'll be there when you need me. \nThats what friends are for.",
-        "You make the world more interesting."
+        "You make the world more interesting.",
+        ".. / .-.. --- ...- . / -.-- --- ..-",
     ],
 
     tryExecute(time) {
@@ -41,7 +42,7 @@ module.exports = {
 
 
         for(const member of members) {
-            member.user.send(this.compliments.getRandomElement());
+            member.user.send(this.compliments.getRandomElement() + "\n\n\n(Go to The Bois server and do -role Complimentee to stop receiving compliemnts!)");
         }
     }
 } 
