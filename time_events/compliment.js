@@ -37,7 +37,7 @@ module.exports = {
             this.execute();
         }
     },
-    execute() {
+    async execute() {
         const members = await helper.getMembersInRole('989003511968714812');
 
 

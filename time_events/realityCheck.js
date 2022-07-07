@@ -6,7 +6,7 @@ module.exports = {
     tryExecute(time) {
         const realityCheckFrequency = 30;
 
-        if(time.hour < eligableHours.startHour && time.hour > eligableHours.endHour)
+        if(time.hour < this.eligableHours.startHour && time.hour > this.eligableHours.endHour)
             return;
 
         if(time.minute % realityCheckFrequency != 0)
@@ -14,6 +14,7 @@ module.exports = {
         
         this.execute();
     },
+    
     async execute() {
         const members = await helper.getMembersInRole('958396226565447723');
 

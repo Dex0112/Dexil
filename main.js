@@ -118,11 +118,10 @@ client.giveExp = async (message) => {
 setInterval(() => {
     const timeZone = 'America/New_York';
     const now = Temporal.Now.zonedDateTimeISO(timeZone);
-
     for (const event of client.timeEvents) {
         event.tryExecute(now);
     }
-}, 1000 * 60)
+}, 1000 * 1)
 
 /*  MUST BE LAST LINE   */
 client.login(process.env.BOT_TOKEN);
