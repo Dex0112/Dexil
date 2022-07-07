@@ -9,7 +9,7 @@ module.exports = {
 
             message.guild.roles.cache.each(role => {
                 if(!message.member.roles.cache.has(role.id) && role.position < highestPosition)
-                    reply += `${role.name}\n`;
+                    reply += `${role.name.replace(' ', '_')}\n`;
             });
 
             return message.reply("```" + reply + "```");
