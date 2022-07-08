@@ -1,5 +1,3 @@
-const { client } = require('./main')
-
 module.exports = { 
     getAuthorDisplayName: (message) => {
         const member = message.guild.members.cache.get(message.author.id);
@@ -27,6 +25,8 @@ module.exports = {
     },
 
     getMembersInRole: async (roleID) => {
+        const { client } = require('./main');
+
         const role = await client.guilds.cache.get('939667236786937896').roles.fetch(roleID);
 
         const members = Array.from(role.members.values());

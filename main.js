@@ -72,8 +72,8 @@ client.disciplineMember = (member) => {
         });
         
         helper.getMembersInRole('939667236786937896').then(members => {
-            for(const roleMember in members) {
-                roleMember.send(`${member} was timed out!`);
+            for(const member in members) {
+                member.user.send(`${member} was timed out!`);
             }
         });
     }
@@ -121,7 +121,7 @@ setInterval(() => {
     for (const event of client.timeEvents) {
         event.tryExecute(now);
     }
-}, 1000 * 1)
+}, 1000 * 1);
 
 /*  MUST BE LAST LINE   */
 client.login(process.env.BOT_TOKEN);
