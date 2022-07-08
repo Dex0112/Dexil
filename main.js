@@ -121,7 +121,7 @@ setInterval(() => {
     for (const event of client.timeEvents) {
         event.tryExecute(now);
     }
-}, 1000 * 1);
+}, 1000 * 60);
 
 /*  MUST BE LAST LINE   */
 client.login(process.env.BOT_TOKEN);
