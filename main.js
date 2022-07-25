@@ -23,7 +23,7 @@ client.offenders = {};
 client.commandPrefix = '-';
 
 client.validateMessage = async (message) => {
-    const minMessageLength = 2;
+    const minMessageLength = 0;
 
     const spamCheckRange = 5;
     const maxSpamCount = 2;
