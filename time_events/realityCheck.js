@@ -6,7 +6,7 @@ module.exports = {
     tryExecute(time) {
         const realityCheckFrequency = 30;
 
-        if(time.hour < this.eligableHours.startHour && time.hour > this.eligableHours.endHour)
+        if(time.hour > this.eligableHours.startHour && time.hour < this.eligableHours.endHour)
             return;
 
         if(time.minute % realityCheckFrequency != 0)
