@@ -1,6 +1,6 @@
 module.exports = {
     name: "role",
-    description: "Gives or removes roll. Leave argument empy to see list of all eligible roles.",
+    description: "Gives or removes roll. Leave argument empy to see list of all eligible roles. (``-role`` or ``-role @(role))",
     execute(message, args) {
         if(args[0] == null) {
             var reply = "Eligible roles:\n";
@@ -9,13 +9,13 @@ module.exports = {
 
             message.guild.roles.cache.each(role => {
                 if(!message.member.roles.cache.has(role.id) && role.position < highestPosition)
-                    reply += `${role.name.replace(' ', '_')}\n`;
+                    reply += `${role.name}\n`;
             });
 
             return message.reply("```" + reply + "```");
         }
         
-        const role = message.guild.roles.cache.find(r => r.name.toLowerCase() === args[0].toLowerCase().replace("_", " "));
+        const role = message.mentions.roles.first();
 
         if(role == null)
             return message.reply("Role does not exist! Do ``-role`` with no arguments to get a list of eligible roles for you!");

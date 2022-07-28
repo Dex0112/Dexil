@@ -33,7 +33,7 @@ client.validateMessage = async (message) => {
     if(message.content.startsWith(this.commandPrefix))
         return;
 
-    if (unregulatedChannels.includes(message.channel.id))
+    if(unregulatedChannels.includes(message.channel.id))
         return;
 
     if (message.attachments.size != 0)
