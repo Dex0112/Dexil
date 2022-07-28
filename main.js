@@ -28,7 +28,7 @@ client.validateMessage = async (message) => {
     const spamCheckRange = 5;
     const maxSpamCount = 2;
 
-    const unregulatedChannels = [];//['945730937432444998', '939745999537176657'];
+    const unregulatedChannels = ['945730937432444998', '939745999537176657'];
 
     if(message.content.startsWith(this.commandPrefix))
         return;
@@ -73,6 +73,8 @@ client.disciplineMember = (member) => {
                     mbr.user.send(`${member} was timed out!`);
                 }
             });
+
+            member.user.send(`You have been timed out for ${timeoutLength} mintes for spam!`)
         }).catch(err => {
             console.log(`Could not timeout ${member}!`);
         });
