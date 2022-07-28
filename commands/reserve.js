@@ -31,7 +31,7 @@ module.exports = {
                         allow: [Permissions.FLAGS.CONNECT],
                     }
                 ]
-            }).then(channel => {                
+            }).then(channel => {
                 message.reply(`You have ${CHANNEL_MIN_LIFE} minutes to join ${channel}!`);
 
                 var intervalID = setInterval(() => {
