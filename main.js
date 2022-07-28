@@ -41,6 +41,7 @@ client.validateMessage = async (message) => {
 
     if (message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
         client.disciplineMember(message.member);
+        message.user.send("You message has been deleted for suspected spam!");
         return message.delete();
     }
 
