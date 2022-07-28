@@ -81,7 +81,7 @@ client.disciplineMember = (member) => {
             console.log(`Could not timeout ${member}!`);
         });
     } else
-        return message.user.send("You message has been deleted for suspected spam!");
+        return member.user.send("You message has been deleted for suspected spam!");
 
     setInterval(() => {
         client.offenders[member.id] = client.offenders[member.id] - 1;
