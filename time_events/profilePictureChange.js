@@ -2,8 +2,6 @@ const { client } = require('../main');
 
 module.exports = {
     tryExecute(time) {
-        console.log(time.minute);
-
         if(time.minute == 0) {
             this.execute();
         }

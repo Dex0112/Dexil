@@ -5,7 +5,7 @@ const { Temporal } = require('@js-temporal/polyfill');
 
 const Discord = require('discord.js');
 
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] });
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", 'GUILD_VOICE_STATES'] });
 
 module.exports.client = client;
 
