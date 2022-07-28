@@ -74,7 +74,7 @@ client.disciplineMember = (member) => {
                 }
             });
 
-            member.user.send(`You have been timed out for ${timeoutLength} mintes for spam!`)
+            member.user.send(`You have been timed out for ${timeoutLength} minutes for spam!`)
         }).catch(err => {
             console.log(`Could not timeout ${member}!`);
         });
