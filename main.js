@@ -28,7 +28,7 @@ client.validateMessage = async (message) => {
     const spamCheckRange = 5;
     const maxSpamCount = 2;
 
-    const unregulatedChannels = ['945730937432444998', '939745999537176657'];
+    const unregulatedChannels = [];//['945730937432444998', '939745999537176657'];
 
     if(message.content.startsWith(this.commandPrefix))
         return;
@@ -67,14 +67,14 @@ client.disciplineMember = (member) => {
     client.offenders[member.id] = client.offenders[member.id] + 1 || 1;
 
     if (client.offenders[member.id] >= maxOffenses) {
-        member.timeout(timeoutLength * 60 * 1000).catch(err => {
+        member.timeout(timeoutLength * 60 * 1000).then(() => {
+            helper.getMembersInRole('939667378948681730').then(members => {
+                for(const mbr of members) {
+                    mbr.user.send(`${member} was timed out!`);
+                }
+            });
+        }).catch(err => {
             console.log(`Could not timeout ${member}!`);
-        });
-        
-        helper.getMembersInRole('939667236786937896').then(members => {
-            for(const member in members) {
-                member.user.send(`${member} was timed out!`);
-            }
         });
     }
 
