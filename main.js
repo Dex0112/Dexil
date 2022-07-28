@@ -54,7 +54,7 @@ client.validateMessage = async (message) => {
 
         if (spamCounter >= maxSpamCount) {
             client.disciplineMember(message.member);
-            return;// message.delete();
+            return message.delete();
         }
     }
 }
