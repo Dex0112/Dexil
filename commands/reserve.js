@@ -37,6 +37,7 @@ module.exports = {
                 var intervalID = setInterval(() => {
                     if(channel.members.size <= 0) {
                         channel.delete();
+
                         clearInterval(intervalID);
 
                         return console.log("Done");
@@ -46,7 +47,7 @@ module.exports = {
                 }, CHANNEL_MIN_LIFE * 60 * 1000);
             });
         } catch(err) {
-            message.reply("There was an unexpected error while creating the voice chat!");
+            message.reply("There was an unexpected error while creating the voice channel!");
         }
     }
 }

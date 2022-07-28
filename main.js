@@ -41,7 +41,6 @@ client.validateMessage = async (message) => {
 
     if (message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
         client.disciplineMember(message.member);
-        message.user.send("You message has been deleted for suspected spam!");
         return message.delete();
     }
 
@@ -55,7 +54,7 @@ client.validateMessage = async (message) => {
 
         if (spamCounter >= maxSpamCount) {
             client.disciplineMember(message.member);
-            return message.delete();
+            return;// message.delete();
         }
     }
 }
@@ -71,6 +70,8 @@ client.disciplineMember = (member) => {
         member.timeout(timeoutLength * 60 * 1000).then(() => {
             helper.getMembersInRole('939667378948681730').then(members => {
                 for(const mbr of members) {
+                    console.log(mbr != null);
+
                     mbr.user.send(`${member} was timed out!`);
                 }
             });
@@ -79,7 +80,8 @@ client.disciplineMember = (member) => {
         }).catch(err => {
             console.log(`Could not timeout ${member}!`);
         });
-    }
+    } else
+        return message.user.send("You message has been deleted for suspected spam!");
 
     setInterval(() => {
         client.offenders[member.id] = client.offenders[member.id] - 1;
