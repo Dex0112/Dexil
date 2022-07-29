@@ -1,6 +1,6 @@
 module.exports = {
     name: "role",
-    description: "Gives or removes roll. Leave argument empy to see list of all eligible roles. (``-role`` or ``-role @(role))",
+    description: "Gives or removes roll. Leave argument empy to see list of all eligible roles. (-role or -role @(role))",
     execute(message, args) {
         if(args[0] == null) {
             var reply = "Eligible roles:\n";

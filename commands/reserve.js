@@ -2,7 +2,7 @@ const { Permissions } = require("discord.js");
 
 module.exports = {
     name: "reserve",
-    description: "Creates a voice channel for a specified role. (``-reserve @(role)``)",
+    description: "Creates a voice channel for a specified role. (-reserve @(role))",
     execute: (message, args) => {
         const CHANNEL_MIN_LIFE = 1;
 
