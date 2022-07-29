@@ -3,6 +3,9 @@ module.exports = (Discord, client, member) => {
     
     database.updateDatabase({ id: member.user.id, exp: 3, love: 0 });
 
+    member.roles.add('946977499647197245');
+    member.roles.add('989003511968714812');
+
     member.guild.channels.cache.get('939667236786937898').send(`Welcome to TB (not tuberculosis) ${member}`);
     member.user.send("GET OUT WHILE YOU STILL CAN!!!");
     setTimeout(() => {
