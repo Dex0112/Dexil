@@ -13,7 +13,7 @@ module.exports = {
         if(!role)
             return message.reply("You must add a role as a parameter to reserve a voice channel!");
 
-        if(!message.member.roles.cache.has(role.id))
+        if(!message.member.roles.cache.has(role.id) && !message.member.roles.cache.has('939667378948681730'))
             return message.reply("You must have the role you want to reserve a voice channel for!")
 
         try {
