@@ -25,7 +25,7 @@ module.exports = {
         client.validateOffender(member);
 
         if(!client.offenders[member.id].flags.includes(message.member.id))
-            client.offenders[member.id].flags.push(message.member.id) && console.log(client.offenders[member.id].flags);
+            client.offenders[member.id].flags.push(message.member.id) && message.reply("You have flagged this user!");
         else
             return message.reply("You have already flagged this member. To flag this member again, try again later!");
 
