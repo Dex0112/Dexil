@@ -9,7 +9,8 @@ module.exports = {
         "Dexil ❤️",
         "Dexil is cute",
         "Dexil lookin fine",
-        "😘"
+        "😘",
+        "Dexil, you're cute"
     ],
     responses: [
         ":heart::heart::heart:",

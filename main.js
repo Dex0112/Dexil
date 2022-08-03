@@ -39,7 +39,7 @@ client.validateMessage = async (message) => {
     if (message.attachments.size != 0)
         return;
 
-    if (message.content.length < minMessageLength && /^\d+$/.test(message.content) == false) {
+    if (message.content.trim().length < minMessageLength && /^\d+$/.test(message.content) == false) {
         client.disciplineMember(message.member);
         return message.delete();
     }
@@ -64,9 +64,11 @@ client.disciplineMember = (member) => {
     const offenseLength = 3;
     const timeoutLength = 15;
 
-    client.offenders[member.id] = client.offenders[member.id] + 1 || 1;
+    client.validateOffender(member);
 
-    if (client.offenders[member.id] >= maxOffenses) {
+    client.offenders[member.id].offenses += 1;
+
+    if (client.offenders[member.id].offenses >= maxOffenses) {
         member.timeout(timeoutLength * 60 * 1000).then(() => {
             helper.getMembersInRole('939667378948681730').then(members => {
                 for(const mbr of members) {
@@ -83,8 +85,8 @@ client.disciplineMember = (member) => {
     } else
         return member.user.send("You message has been deleted for suspected spam!");
 
-    setInterval(() => {
-        client.offenders[member.id] = client.offenders[member.id] - 1;
+    setTimeout(() => {
+        client.offenders[member.id].offenses = client.offenders[member.id].offenses - 1;
     }, offenseLength * 60 * 1000);
 }
 
@@ -114,6 +116,13 @@ client.giveExp = async (message) => {
     }
 
     database.mutateData({ id: message.author.id, exp: gainedExp, love: 0 });
+}
+
+client.validateOffender = member => {
+    if(client.offenders[member.id] != null)
+        return;
+
+    client.offenders[member.id] = { offenses: 0, flags: [] };
 }
 
 ['command_handler', 'response_handler', 'event_handler', 'time_event_handler'].forEach(handler => {
