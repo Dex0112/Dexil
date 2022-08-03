@@ -17,7 +17,7 @@ module.exports = {
                 message.reply(`${member} could not be timed out!`);
             }).then(() => {
                 message.reply(`${member} has been timed out`);
-            })
+            });
         }
 
         if(member.isCommunicationDisabled()) {
