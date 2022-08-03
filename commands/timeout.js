@@ -15,6 +15,8 @@ module.exports = {
         if(message.member.roles.cache.has('939667378948681730')) {
             return member.timeout((Number.parseInt(args[1]) || timeoutLength) * 60 * 1000).catch(err => {
                 message.reply(`${member} could not be timed out!`);
+            }).then(() => {
+                message.reply(`${member} has been timed out`);
             })
         }
 
