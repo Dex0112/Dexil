@@ -30,7 +30,7 @@ client.validateMessage = async (message) => {
 
     const unregulatedChannels = ['945730937432444998', '939745999537176657'];
 
-    if(message.content.startsWith(this.commandPrefix))
+    if(message.content.startsWith(client.commandPrefix))
         return;
 
     if(unregulatedChannels.includes(message.channel.id))
