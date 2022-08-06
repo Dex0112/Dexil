@@ -30,6 +30,7 @@ module.exports = {
         "I like you so much I wrote you a poem- \nI will laugh when you laugh. \nI will cry when you cry. \nI will tell you, you're lovely, \nand that is no lie. \n\nI will join you for lunch, \nand we'll share a dessert, \nas we catch up on gossip, \n and dish all that dirt. \n\nI will keep all your secret, \nI know you'll keep mine, \ntill were old, grey, and wrinkled, \ntill the end of all time\n\nTo be your best friend, \nI'll be all that and more. \nI'll be there when you need me. \nThats what friends are for.",
         "You make the world more interesting.",
         ".. / .-.. --- ...- . / -.-- --- ..-",
+        "If you were a scented candle they'd call it Perfectly Imperfect (and it would smell like summer)."
     ],
 
     tryExecute(time) {
