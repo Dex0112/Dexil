@@ -1,0 +1,10 @@
+module.exports = {
+    name: "",
+    runtime: {
+        hour: 0,
+        minute: 0
+    },
+    execute() {
+
+    }
+}
