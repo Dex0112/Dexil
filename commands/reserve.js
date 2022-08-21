@@ -25,17 +25,15 @@ module.exports = {
             }
         ];
 
+        const generalPermission = { id: guild.id, allow: [Permissions.FLAGS.VIEW_CHANNEL], deny: []};
+
         if(spectators) {
-            permissionOverwrites.push({
-                id: message.guild.id,
-                deny: [Permissions.FLAGS.SPEAK]
-            });
+            generalPermission.allow.push(Permissions.FLAGS.SPEAK);
         } else {
-            permissionOverwrites.push({
-                id: message.guild.id,
-                deny: [Permissions.FLAGS.CONNECT]
-            })
+            generalPermission.deny.push(Permissions.FLAGS.CONNECT);
         }
+
+        permissionOverwrites.push(generalPermission);
 
         try {
             message.guild.channels.create(role.name, {
