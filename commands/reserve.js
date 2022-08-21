@@ -21,7 +21,7 @@ module.exports = {
         const permissionOverwrites = [
             {
                 id: role.id,
-                allow: [Permissions.FLAGS.CONNECT]
+                allow: [Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK]
             }
         ];
 
