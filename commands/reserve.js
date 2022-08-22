@@ -25,7 +25,7 @@ module.exports = {
             }
         ];
 
-        const generalPermission = { id: guild.id, allow: [Permissions.FLAGS.VIEW_CHANNEL], deny: [] };
+        const generalPermission = { id: message.guild.id, allow: [Permissions.FLAGS.VIEW_CHANNEL], deny: [] };
 
         if(spectators) {
             generalPermission.allow.push(Permissions.FLAGS.SPEAK);
