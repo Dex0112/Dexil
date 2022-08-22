@@ -29,6 +29,7 @@ module.exports = {
 
         if(spectators) {
             generalPermission.allow.push(Permissions.FLAGS.SPEAK);
+            generalPermission.deny.push(Permissions.FLAGS.CONNECT);
         } else {
             generalPermission.deny.push(Permissions.FLAGS.CONNECT);
         }
