@@ -20,7 +20,10 @@ module.exports = {
         if(role == null)
             return message.reply("Role does not exist! Do ``-role`` with no arguments to get a list of eligible roles for you!");
 
-        if(!message.member.roles.cache.has(role.id) && role.position < seperator) {
+        if(role.position >= seperator)
+            return message.reply("You are not eligible for this role!");
+
+        if(!message.member.roles.cache.has(role.id)) {
             message.member.roles.add(role).then(() => {
                 message.reply(`You have been granted the ${role.name} role!`);
             }).catch(() => {
