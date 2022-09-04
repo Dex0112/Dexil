@@ -6,7 +6,6 @@ const { Temporal } = require('@js-temporal/polyfill');
 const Discord = require('discord.js');
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", 'GUILD_VOICE_STATES'] });
-const { Player } = require("discord-player");
 
 module.exports.client = client;
 
@@ -22,6 +21,35 @@ client.profilePictures = fs.readdirSync('./profile_pictures/').shuffle();
 client.offenders = {};
 
 client.commandPrefix = '-';
+
+module.exports.Permissions = class Permissions {
+    static MANAGE_MESSAGES = new Permissions(
+        "MANAGE_MESSAGES",
+        ['946150969379532870']    
+    );
+    static MANAGE_USERS = new Permissions(
+        "MANAGE_USERS",
+        ['946150969379532870']    
+    );
+
+    constructor(name, roles) {
+        this.name = name;
+        this.roles = roles;
+    }
+
+    static hasPermission(member, permission) {
+        for(const role of permission.roles) {
+            if(member.roles.cache.has(role))
+                return true;
+        }
+    
+        return false;
+    }
+
+    toString() {
+        return `Permissions.${this.name}`;
+    }
+}
 
 client.validateMessage = async (message) => {
     const minMessageLength = 0;

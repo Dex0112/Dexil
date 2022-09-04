@@ -1,12 +1,13 @@
 const database = require("../database.js");
 const helper = require("../helper.js");
+const { Permissions } = require("../main.js");
 
 module.exports = {
     name: "data",
     description: "Displays data of user. (@user for mods)",
     async execute(message, args) {
         if(message.mentions.members.first()) {
-            if(!message.member.roles.cache.has('939667378948681730'))
+            if(!Permissions.hasPermission(message.member, Permissions.MANAGE_USERS))
                 return message.reply("You do not have permission to complete this command!");
         }
 
