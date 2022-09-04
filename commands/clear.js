@@ -2,7 +2,7 @@ module.exports = {
     name: "clear",
     description: "Clears messages a channel (requires moderator)",
     async execute(message, args) {
-        if(!message.member.roles.cache.has('939667378948681730'))
+        if(!message.member.roles.cache.has('946150969379532870'))
             return message.reply("You do not have permission to complete this command!");
 
         if(!args[0]) 
