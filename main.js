@@ -45,10 +45,6 @@ module.exports.Permissions = class Permissions {
     
         return false;
     }
-
-    toString() {
-        return `Permissions.${this.name}`;
-    }
 }
 
 client.validateMessage = async (message) => {
