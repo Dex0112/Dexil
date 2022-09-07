@@ -1,5 +1,3 @@
-const { execute } = require("./about");
-
 module.exports = {
     name: "message",
     description: "Sends message to user (``-message @user \"Message here!\"``). MODS ONLY",
