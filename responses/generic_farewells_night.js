@@ -1,5 +1,4 @@
 const helper = require("../helper");
-const database = require('../database.js');
 
 module.exports = {
     triggers: [

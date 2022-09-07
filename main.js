@@ -10,7 +10,6 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 module.exports.client = client;
 
 const fs = require('fs');
-const database = require('./database');
 const helper = require('./helper');
 
 client.commands = new Discord.Collection();
@@ -113,34 +112,6 @@ client.disciplineMember = (member) => {
     setTimeout(() => {
         client.offenders[member.id].offenses = client.offenders[member.id].offenses - 1;
     }, offenseLength * 60 * 1000);
-}
-
-client.giveExp = async (message) => {
-    const MIN_GAINED_EXP = 0;
-    const MAX_GAINED_EXP = 10;
-
-    const MAX_EXP_PER_MESSAGE = 17;
-
-    const MESSAGE_LENGTH_WEIGHT = .2;
-
-    var gainedExp = Math.randomIntInRange(MIN_GAINED_EXP, MAX_GAINED_EXP);
-
-    gainedExp += Math.floor(message.content.split(' ').length * MESSAGE_LENGTH_WEIGHT);
-
-    gainedExp = Math.clamp(gainedExp, 0, MAX_EXP_PER_MESSAGE);
-
-    const memberData = await database.getData(message.author.id);
-
-    if(memberData == null)
-        return;
-
-    const expToNextLevel = helper.getExpToNextLevel(memberData.exp);
-
-    if (expToNextLevel <= gainedExp) {
-        message.reply(`\`\`${helper.getAuthorDisplayName(message)} has leveled up!\`\``);
-    }
-
-    database.mutateData({ id: message.author.id, exp: gainedExp, love: 0 });
 }
 
 client.validateOffender = member => {
