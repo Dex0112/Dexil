@@ -25,7 +25,4 @@ module.exports = (Discord, client, message) => {
     }
 
     client.validateMessage(message);
-
-    // if(message.channel.id != '945730937432444998')
-    //     client.giveExp(message);
 }
