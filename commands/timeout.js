@@ -33,6 +33,7 @@ module.exports = {
 
         if(client.offenders[member.id].flags.length >= maxFlags) {
             client.offenders[member.id].flags = [];
+            message.reply("This user has been timed out for " + timeoutLength + " minutes!");
             return member.timeout(timeoutLength * 60 * 1000);
         }
 
