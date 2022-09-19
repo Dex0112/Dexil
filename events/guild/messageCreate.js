@@ -3,7 +3,7 @@ module.exports = (Discord, client, message) => {
 
     if(message.author.bot) return;
 
-    if(message.content.toLowerCase().includes("landon")) {
+    if(message.content.toLowerCase().includes("landon") || message.content.toLowerCase().includes("landen")) {
         message.author.send("You dare speak my masters name!");
         try {
             message.member.timeout(30 * 60 * 1000);
