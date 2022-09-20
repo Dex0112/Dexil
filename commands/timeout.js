@@ -1,4 +1,4 @@
-const { client } = require('../main'); 
+const { client, Permissions } = require('../main'); 
 
 module.exports = {
     name: "timeout",
@@ -12,7 +12,7 @@ module.exports = {
         if(member == null)
             return message.reply("Please enter a valid member!");
         
-        if(message.member.roles.cache.has('939667378948681730')) {
+        if(Permissions.hasPermission(message.member, Permissions.MANAGE_USERS)) {
             return member.timeout((Number.parseInt(args[1]) || timeoutLength) * 60 * 1000).catch(err => {
                 message.reply(`${member} could not be timed out!`);
             }).then(() => {
