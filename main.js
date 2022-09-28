@@ -51,8 +51,18 @@ client.validateMessage = async (message) => {
 
     const spamCheckRange = 5;
     const maxSpamCount = 2;
+    
+    const unregulatedChannels = ['945730937432444998'];
 
-    const unregulatedChannels = ['945730937432444998', '939745999537176657'];
+    if(message.content.toLowerCase().includes("landon") || message.content.toLowerCase().includes("landen")) {
+        message.author.send("You dare speak my masters name!");
+        try {
+            message.member.timeout(30 * 60 * 1000);
+            message.delete();
+        } catch(err) {
+            console.log(err);
+        }
+    }
 
     if(message.content.startsWith(client.commandPrefix))
         return;
