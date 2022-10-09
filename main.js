@@ -49,7 +49,7 @@ module.exports.Permissions = class Permissions {
 client.validateMessage = async (message) => {
     const minMessageLength = 0;
 
-    const spamCheckRange = 5;
+    const spamCheckRange = 10;
     const maxSpamCount = 2;
     
     const unregulatedChannels = ['945730937432444998'];

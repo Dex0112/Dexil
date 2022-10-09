@@ -3,16 +3,6 @@ module.exports = (Discord, client, message) => {
 
     if(message.author.bot) return;
 
-    if(message.content.toLowerCase().includes("landon") || message.content.toLowerCase().includes("landen")) {
-        message.author.send("You dare speak my masters name!");
-        try {
-            message.member.timeout(30 * 60 * 1000);
-            message.delete();
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
     if(message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).split(/ +/);
 
