@@ -14,7 +14,13 @@ module.exports = (Discord, client, message) => {
             command.execute(message, args);
         else
             message.reply("This is not a command do ``-help`` to get a list of commands!");
+        return;
     }
+
+    client.validateMessage(message);
+
+    if(message == null)
+        return;
 
     const response = client.responses.get(message.content.toLowerCase());
 
@@ -23,6 +29,4 @@ module.exports = (Discord, client, message) => {
 
         return;
     }
-
-    client.validateMessage(message);
 }
