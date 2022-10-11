@@ -3,6 +3,12 @@ module.exports = (Discord, client, message) => {
 
     if(message.author.bot) return;
 
+    //Zero width character
+    if(message.content.includes("​")) {
+        message.author.send("Be less sussy!");
+        return message.delete();
+    }
+    
     if(message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).split(/ +/);
 
