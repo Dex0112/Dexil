@@ -12,13 +12,8 @@ module.exports = {
         if(member == null)
             return message.reply("Please enter a valid member!");
         
-        if(Permissions.hasPermission(message.member, Permissions.MANAGE_USERS)) {
-            return member.timeout((Number.parseInt(args[1]) || timeoutLength) * 60 * 1000).catch(err => {
-                message.reply(`${member} could not be timed out!`);
-            }).then(() => {
-                message.reply(`${member} has been timed out`);
-            });
-        }
+        if(Permissions.hasPermission(message.member, Permissions.MANAGE_USERS))
+            return client.timeoutMember(member, Number.parseInt(args[1]) || timeoutLength, null, () => message.reply("User has successfully been timed out!"));
 
         if(member.isCommunicationDisabled()) {
             return message.reply("This user is already timed out!");

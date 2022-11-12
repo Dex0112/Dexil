@@ -1,4 +1,4 @@
-const { Permissions } = require("../main.js");
+const { client, Permissions } = require("../main.js");
 
 module.exports = {
     name: "clear",
@@ -14,6 +14,7 @@ module.exports = {
 
         await message.channel.messages.fetch({ limit: parseInt(args[0]) + 1 }).then(messages => {
             message.channel.bulkDelete(messages, true);
+            client.updateLog(`Bulk delete in ${message.channel}`);
         });
     }
 }
