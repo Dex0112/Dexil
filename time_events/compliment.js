@@ -34,16 +34,18 @@ module.exports = {
     ],
 
     tryExecute(time) {
-        if(time.hour == 15 && time.minute == 0) {
+        if(time.hour == 22 && time.minute == 30) {
             this.execute();
         }
     },
-    async execute() {
-        const members = await helper.getMembersInRole('989003511968714812');
+    execute() {
+        const members = helper.getMembersInRole('989003511968714812');
 
 
         for(const member of members) {
-            member.user.send(this.compliments.getRandomElement() + "\n\n\n(Go to The Bois server and do -role Complimentee to stop receiving compliemnts!)");
+            member.user.send(this.compliments.getRandomElement() + "\n\n\n(Go to The Bois server and do -role Complimentee to stop receiving compliemnts!)").catch(err => {
+                console.error("Couldn't send message to " + member.displayName);
+            });
         }
     }
 } 
