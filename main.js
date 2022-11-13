@@ -1,6 +1,5 @@
 require('dotenv').config();
 require('./helper');
-const http = require("http");
 
 const { Temporal } = require('@js-temporal/polyfill');
 
@@ -22,15 +21,7 @@ client.offenders = {};
 
 client.commandPrefix = '-';
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "text/plain");
-    res.end("Hello Zeet Node");
-})
-
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
+console.log("running?");
 
 module.exports.Permissions = class Permissions {
     static MANAGE_MESSAGES = new Permissions(
