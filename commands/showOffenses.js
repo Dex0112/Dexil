@@ -6,7 +6,7 @@ module.exports = {
     execute(message, args) {
         const member = message.mentions.members.first();
 
-        if(Permissions.hasPermission(message.member, Permissions.MANAGE_USERS))
+        if(!Permissions.hasPermission(message.member, Permissions.MANAGE_USERS))
             return message.reply("You do not have the correct permissions!");
 
         if(member == null)

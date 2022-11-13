@@ -11,6 +11,8 @@ module.exports = {
         
         const roleMembers = await helper.getMembersInRole(role.id);
 
+        console.log("View" + roleMembers);
+
         if(roleMembers.length == 0) 
             return message.reply("Nobody has this role!");
 

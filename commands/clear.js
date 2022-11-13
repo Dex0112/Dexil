@@ -20,7 +20,9 @@ module.exports = {
         await message.channel.messages.fetch({ limit: parseInt(args[0]) + 1 }).then(messages => {
             message.channel.bulkDelete(messages, true);
 
-            var updateMessage = `Bulk delete in ${message.channel}`;
+            console.log(messages);
+
+            var updateMessage = `Bulk delete of ${[...messages].length - 1} messages in ${message.channel}`;
             if(reason) updateMessage += ` for '${reason}'`;
             client.updateLog(updateMessage);
         });

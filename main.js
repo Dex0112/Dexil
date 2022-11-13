@@ -45,6 +45,8 @@ module.exports.Permissions = class Permissions {
     }
 };
 
+client.devMode = process.env.DEV_MODE;
+
 client.validateMessage = async (message) => {
     const minMessageLength = 0;
 

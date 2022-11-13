@@ -24,13 +24,13 @@ module.exports = {
         return nextLevelExp - exp;
     },
 
-    getMembersInRole: async (roleID) => {
+    async getMembersInRole(roleID, guildID = '939667236786937896') {
         const { client } = require('./main');
 
-        const role = await client.guilds.cache.get('939667236786937896').roles.fetch(roleID);
+        const role = await client.guilds.cache.get(guildID).roles.fetch(roleID);
+        console.log(role);
 
-        const members = Array.from(role.members.values());
-
+        const memebers = [];
         return members;
     }
 }
