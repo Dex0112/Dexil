@@ -1,5 +1,6 @@
 require('dotenv').config();
 require('./helper');
+const http = require("http");
 
 const { Temporal } = require('@js-temporal/polyfill');
 
@@ -10,6 +11,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 module.exports.client = client;
 
 const fs = require('fs');
+const { hostname } = require('os');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
@@ -20,7 +22,15 @@ client.offenders = {};
 
 client.commandPrefix = '-';
 
-console.log("Hello World");
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain");
+    res.end("Hello Zeet Node");
+})
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+});
 
 module.exports.Permissions = class Permissions {
     static MANAGE_MESSAGES = new Permissions(
