@@ -1,10 +1,14 @@
+const { ReactionUserManager } = require("discord.js");
+
 module.exports = (Discord, client, message) => {
     const prefix = client.commandPrefix;
 
     if(message.author.bot) return;
 
-    if(message.channel.id == "1041163087073513532" && client.devMode == "production") return;
-    
+    if(message.channelId == "1041163087073513532") {
+        if(client.devMode == "production") return;
+    } else if(client.devMode == 'local') return;
+
     if(message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).split(/ +/);
 
