@@ -12,9 +12,17 @@ module.exports = {
         if(args[0] > 99) return message.reply("You cannot delete more than 99 mesages!");
         if(args[0] < 1) return message.reply("You must delete at least one message!");
 
+        const reason = message.content.indexOf('"') >= 0 ? message.content.slice(
+            message.content.indexOf('"') + 1,
+            message.content.lastIndexOf('"')
+        ) : null;
+
         await message.channel.messages.fetch({ limit: parseInt(args[0]) + 1 }).then(messages => {
             message.channel.bulkDelete(messages, true);
-            client.updateLog(`Bulk delete in ${message.channel}`);
+
+            var updateMessage = `Bulk delete in ${message.channel}`;
+            if(reason) updateMessage += ` for '${reason}'`;
+            client.updateLog(updateMessage);
         });
     }
 }

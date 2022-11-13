@@ -12,10 +12,10 @@ module.exports = {
         if(member == null) 
             return message.reply("Please enter a valid user!");
 
-        const content = message.content.slice(
+        const content = message.content.indexOf('"') >= 0 ? message.content.slice(
             message.content.indexOf('"') + 1,
             message.content.lastIndexOf('"')
-        );
+        ) : null;
 
         try {
             member.user.send(content) 
