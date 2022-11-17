@@ -133,9 +133,11 @@ client.timeoutMember = (member, timeoutLength, reason, callback) => {
         return;
     
     member.timeout(timeoutLength * 1000 * 60).then(() => {
-        if(reason != null) member.send(`You have been timed out for '${reason}'!`);
+        var userMsg = `You have been timed out for ${timeoutLength} minutes.`
+
+        if(reason) userMsg += " Reason: " + reason;
         
-        member.send(`You have been timed out for ${timeoutLength}!`);
+        member.send(userMsg);
         client.updateLog(`${member} has been timed out for ${timeoutLength} minutes${reason ? " for " + reason : ""}!`); 
         if(callback) callback();
     }).catch(err => {

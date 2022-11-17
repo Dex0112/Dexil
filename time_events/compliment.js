@@ -34,7 +34,7 @@ module.exports = {
     ],
 
     tryExecute(time) {
-        if(time.hour == 22 && time.minute == 30) {
+        if(time.hour == 16 && time.minute == 0) {
             this.execute();
         }
     },
