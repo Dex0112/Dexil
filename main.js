@@ -58,6 +58,15 @@ client.validateMessage = async (message) => {
     
     const unregulatedChannels = ['945730937432444998'];
 
+    const bannedKeywords = [
+        "kys",
+        "kill yourself"
+    ];
+
+    for(const keyword of bannedKeywords) {
+        if(message.content.toLowerCase().includes(keyword)) client.deleteMessage(message, "Saying " + keyword, 3 * 60);
+    }
+
     //Zero width character
     if(message.content.includes("​"))
         return client.deleteMessage(message, "Zero width character used");
@@ -119,7 +128,7 @@ client.validateOffender = member => {
 };
 
 client.deleteMessage = (message, reason = null, timeoutLength = 0) => {
-    client.updateLog(`Message, by ${message.member}, was deleted!\nContents: '${message.content}'${reason ? `\nReason: ${reason}` : ""}`);
+    client.updateLog(`Message, by ${message.member}, was deleted!\nContents: '${message.content}'\nLocation: ${message.channel}${reason ? `\nReason: ${reason}` : ""}`);
     
     reason ? message.member.send("Your message has been deleted for '" + reason + "'!") : message.user.send("You message has been deleted!");
 
