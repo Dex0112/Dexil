@@ -63,6 +63,10 @@ client.validateMessage = async (message) => {
         "kill yourself"
     ];
 
+    const bannedNames = [
+        "landon", "landen", "land0n", "l@ndon", "l@nden", "l@and0n"
+    ];
+
     for(const keyword of bannedKeywords) {
         if(message.content.toLowerCase().includes(keyword)) client.deleteMessage(message, "Saying " + keyword, 3 * 60);
     }
@@ -71,10 +75,10 @@ client.validateMessage = async (message) => {
     if(message.content.includes("​"))
         return client.deleteMessage(message, "Zero width character used");
 
-    if(message.content.toLowerCase().includes("landon") || message.content.toLowerCase().includes("landen")) {
-        client.deleteMessage(message, "Saying the wrong name", 24*60);
+    for(const name of bannedNames) {
+        if(message.content.toLowerCase().includes(name))
+            client.deleteMessage(message, "Saying the wrong name", 24*60);
     }
-
     if(message.content.startsWith(client.commandPrefix))
         return;
 
