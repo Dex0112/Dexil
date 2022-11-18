@@ -10,7 +10,6 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 module.exports.client = client;
 
 const fs = require('fs');
-const { hostname } = require('os');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
