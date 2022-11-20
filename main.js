@@ -20,8 +20,6 @@ client.offenders = {};
 
 client.commandPrefix = '-';
 
-console.log("running?");
-
 module.exports.Permissions = class Permissions {
     static MANAGE_MESSAGES = new Permissions(
         "MANAGE_MESSAGES",
