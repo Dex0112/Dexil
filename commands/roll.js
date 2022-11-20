@@ -6,6 +6,8 @@ module.exports = {
         
         const dieSize = Number.parseInt(args[0]);
 
+        if(dieSize <= 0) return message.reply("Please input a valid size");
+
         const roll = Math.randomIntInRange(1, dieSize + 1);
 
         message.reply(`${message.member} rolled a ${roll}!`);
