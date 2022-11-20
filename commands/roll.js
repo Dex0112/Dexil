@@ -8,6 +8,6 @@ module.exports = {
 
         const roll = Math.randomIntInRange(1, dieSize + 1);
 
-        message.reply(`${message.member} rolled at ${roll}!`);
+        message.reply(`${message.member} rolled a ${roll}!`);
     }
 }
