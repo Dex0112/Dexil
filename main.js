@@ -10,8 +10,6 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 module.exports.client = client;
 
 const fs = require('fs');
-const database = require('./database');
-const helper = require('./helper');
 
 client.commands = new Discord.Collection();
 client.responses = new Discord.Collection();
@@ -22,14 +20,62 @@ client.offenders = {};
 
 client.commandPrefix = '-';
 
+module.exports.Permissions = class Permissions {
+    static MANAGE_MESSAGES = new Permissions(
+        "MANAGE_MESSAGES",
+        ['946150969379532870']    
+    );
+    static MANAGE_USERS = new Permissions(
+        "MANAGE_USERS",
+        ['946150969379532870']    
+    );
+
+    constructor(name, roles) {
+        this.name = name;
+        this.roles = roles;
+    }
+
+    static hasPermission(member, permission) {
+        for(const role of permission.roles) {
+            if(member.roles.cache.has(role))
+                return true;
+        }
+    
+        return false;
+    }
+};
+
+client.devMode = process.env.DEV_MODE;
+
 client.validateMessage = async (message) => {
     const minMessageLength = 0;
 
-    const spamCheckRange = 5;
+    const spamCheckRange = 10;
     const maxSpamCount = 2;
+    
+    const unregulatedChannels = ['945730937432444998'];
 
-    const unregulatedChannels = ['945730937432444998', '939745999537176657'];
+    const bannedKeywords = [
+        "kys",
+        "kill yourself"
+    ];
 
+    const bannedNames = [
+        "landon", "landen", "land0n", "l@ndon", "l@nden", "l@and0n"
+    ];
+
+    for(const keyword of bannedKeywords) {
+        if(message.content.toLowerCase().includes(keyword)) client.deleteMessage(message, "Saying " + keyword, 3 * 60);
+    }
+
+    //Zero width character
+    if(message.content.includes("​"))
+        return client.deleteMessage(message, "Zero width character used");
+
+    for(const name of bannedNames) {
+        if(message.content.toLowerCase().includes(name))
+            client.deleteMessage(message, "Saying the wrong name", 24*60);
+    }
     if(message.content.startsWith(client.commandPrefix))
         return;
 
@@ -41,7 +87,7 @@ client.validateMessage = async (message) => {
 
     if (message.content.trim().length < minMessageLength && /^\d+$/.test(message.content) == false) {
         client.disciplineMember(message.member);
-        return message.delete();
+        return client.deleteMessage(message, "Minimum length of message not met");
     }
 
 
@@ -54,10 +100,10 @@ client.validateMessage = async (message) => {
 
         if (spamCounter >= maxSpamCount) {
             client.disciplineMember(message.member);
-            return message.delete();
+            return client.deleteMessage(message, "Spam");
         }
     }
-}
+};
 
 client.disciplineMember = (member) => {
     const maxOffenses = 3;
@@ -68,62 +114,53 @@ client.disciplineMember = (member) => {
 
     client.offenders[member.id].offenses += 1;
 
-    if (client.offenders[member.id].offenses >= maxOffenses) {
-        member.timeout(timeoutLength * 60 * 1000).then(() => {
-            helper.getMembersInRole('939667378948681730').then(members => {
-                for(const mbr of members) {
-                    console.log(mbr != null);
-
-                    mbr.user.send(`${member} was timed out!`);
-                }
-            });
-
-            member.user.send(`You have been timed out for ${timeoutLength} minutes for spam!`)
-        }).catch(err => {
-            console.log(`Could not timeout ${member}!`);
-        });
-    } else
-        return member.user.send("You message has been deleted for suspected spam!");
+    if (client.offenders[member.id].offenses >= maxOffenses) client.timeoutMember(member, timeoutLength, "Spam");
 
     setTimeout(() => {
         client.offenders[member.id].offenses = client.offenders[member.id].offenses - 1;
     }, offenseLength * 60 * 1000);
-}
-
-client.giveExp = async (message) => {
-    const MIN_GAINED_EXP = 0;
-    const MAX_GAINED_EXP = 10;
-
-    const MAX_EXP_PER_MESSAGE = 17;
-
-    const MESSAGE_LENGTH_WEIGHT = .2;
-
-    var gainedExp = Math.randomIntInRange(MIN_GAINED_EXP, MAX_GAINED_EXP);
-
-    gainedExp += Math.floor(message.content.split(' ').length * MESSAGE_LENGTH_WEIGHT);
-
-    gainedExp = Math.clamp(gainedExp, 0, MAX_EXP_PER_MESSAGE);
-
-    const memberData = await database.getData(message.author.id);
-
-    if(memberData == null)
-        return;
-
-    const expToNextLevel = helper.getExpToNextLevel(memberData.exp);
-
-    if (expToNextLevel <= gainedExp) {
-        message.reply(`\`\`${helper.getAuthorDisplayName(message)} has leveled up!\`\``);
-    }
-
-    database.mutateData({ id: message.author.id, exp: gainedExp, love: 0 });
-}
+};
 
 client.validateOffender = member => {
     if(client.offenders[member.id] != null)
         return;
 
     client.offenders[member.id] = { offenses: 0, flags: [] };
-}
+};
+
+client.deleteMessage = (message, reason = null, timeoutLength = 0) => {
+    client.updateLog(`Message, by ${message.member}, was deleted!\nContents: '${message.content}'\nLocation: ${message.channel}${reason ? `\nReason: ${reason}` : ""}`);
+    
+    reason ? message.member.send("Your message has been deleted for '" + reason + "'!") : message.user.send("You message has been deleted!");
+
+    if(timeoutLength > 0) client.timeoutMember(message.member, timeoutLength, null);
+
+    message.delete();
+};
+
+client.timeoutMember = (member, timeoutLength, reason, callback) => {
+    if(timeoutLength == 0)
+        return;
+    
+    member.timeout(timeoutLength * 1000 * 60).then(() => {
+        var userMsg = `You have been timed out for ${timeoutLength} minutes.`
+
+        if(reason) userMsg += " Reason: " + reason;
+        
+        member.send(userMsg);
+        client.updateLog(`${member} has been timed out for ${timeoutLength} minutes${reason ? " for " + reason : ""}!`); 
+        if(callback) callback();
+    }).catch(err => {
+        client.updateLog(`Failed to timeout ${member}${reason ? " for " + reason : ""}`);
+    });
+};
+
+client.updateLog = (logMessage) => {
+    const logChannelID = "1029236790537764904";
+    const logChannel = client.guilds.cache.get("939667236786937896").channels.cache.get(logChannelID);
+
+    logChannel.send(logMessage);
+};
 
 ['command_handler', 'response_handler', 'event_handler', 'time_event_handler'].forEach(handler => {
     require(`./handlers/${handler}`)(client, Discord);

@@ -1,7 +1,13 @@
+const { ReactionUserManager } = require("discord.js");
+
 module.exports = (Discord, client, message) => {
     const prefix = client.commandPrefix;
 
     if(message.author.bot) return;
+
+    if(message.channelId == "1041163087073513532") {
+        if(client.devMode == "production") return;
+    } else if(client.devMode == 'local') return;
 
     if(message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).split(/ +/);
@@ -14,7 +20,13 @@ module.exports = (Discord, client, message) => {
             command.execute(message, args);
         else
             message.reply("This is not a command do ``-help`` to get a list of commands!");
+        return;
     }
+
+    client.validateMessage(message);
+
+    if(message == null)
+        return;
 
     const response = client.responses.get(message.content.toLowerCase());
 
@@ -23,9 +35,4 @@ module.exports = (Discord, client, message) => {
 
         return;
     }
-
-    client.validateMessage(message);
-
-    // if(message.channel.id != '945730937432444998')
-    //     client.giveExp(message);
 }

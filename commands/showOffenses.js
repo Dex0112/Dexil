@@ -1,4 +1,4 @@
-const { client } = require('../main');
+const { client, Permissions } = require('../main');
 
 module.exports = {
     name: "offenses",
@@ -6,7 +6,7 @@ module.exports = {
     execute(message, args) {
         const member = message.mentions.members.first();
 
-        if(!message.member.roles.cache.has('939667378948681730'))
+        if(!Permissions.hasPermission(message.member, Permissions.MANAGE_USERS))
             return message.reply("You do not have the correct permissions!");
 
         if(member == null)

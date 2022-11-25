@@ -4,13 +4,6 @@ module.exports = {
         return module.exports.getDisplayName(member);
     },
 
-    getDisplayName: (member) => {
-        if(!member)
-            return null;
-
-        return member.nickname ? member.nickname : member.user.username;
-    },
-
     calculateLevel: (exp = Number()) => {
         exp = Math.min(exp, 0);
 
@@ -24,13 +17,13 @@ module.exports = {
         return nextLevelExp - exp;
     },
 
-    getMembersInRole: async (roleID) => {
+    getMembersInRole(roleID, guildID = '939667236786937896') {
         const { client } = require('./main');
 
-        const role = await client.guilds.cache.get('939667236786937896').roles.fetch(roleID);
+        const role = client.guilds.cache.get(guildID).roles.cache.get(roleID);
 
-        const members = Array.from(role.members.values());
 
+        const members = [...role.members.values()];
         return members;
     }
 }

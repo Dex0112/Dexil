@@ -1,4 +1,4 @@
-const { client } = require('../main'); 
+const { client, Permissions } = require('../main'); 
 
 module.exports = {
     name: "timeout",
@@ -9,20 +9,19 @@ module.exports = {
         const maxFlags = 3;
         const member = message.mentions.members.first();
 
+        const reason = message.content.indexOf('"') >= 0 ? message.content.slice(
+            message.content.indexOf('"') + 1,
+            message.content.lastIndexOf('"')
+        ) : null;
+
         if(member == null)
             return message.reply("Please enter a valid member!");
         
-        if(message.member.roles.cache.has('939667378948681730')) {
-            return member.timeout((Number.parseInt(args[1]) || timeoutLength) * 60 * 1000).catch(err => {
-                message.reply(`${member} could not be timed out!`);
-            }).then(() => {
-                message.reply(`${member} has been timed out`);
-            });
-        }
+        if(Permissions.hasPermission(message.member, Permissions.MANAGE_USERS))
+            return client.timeoutMember(member, Number.parseInt(args[1]) || timeoutLength, reason, () => message.reply("User has successfully been timed out!"));
 
-        if(member.isCommunicationDisabled()) {
+        if(member.isCommunicationDisabled())
             return message.reply("This user is already timed out!");
-        }
 
         client.validateOffender(member);
 
@@ -33,7 +32,8 @@ module.exports = {
 
         if(client.offenders[member.id].flags.length >= maxFlags) {
             client.offenders[member.id].flags = [];
-            return member.timeout(timeoutLength * 60 * 1000);
+            message.reply("This user has been timed out for " + timeoutLength + " minutes!");
+            return client.timeoutMember(member, timeoutLength, "Community Timeout");
         }
 
         setTimeout(() => {

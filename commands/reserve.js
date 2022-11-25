@@ -28,8 +28,8 @@ module.exports = {
         const generalPermission = { id: message.guild.id, allow: [Permissions.FLAGS.VIEW_CHANNEL], deny: [] };
 
         if(spectators) {
-            generalPermission.allow.push(Permissions.FLAGS.SPEAK);
-            generalPermission.deny.push(Permissions.FLAGS.CONNECT);
+            generalPermission.deny.push(Permissions.FLAGS.SPEAK);
+            generalPermission.allow.push(Permissions.FLAGS.CONNECT);
         } else {
             generalPermission.deny.push(Permissions.FLAGS.CONNECT);
         }
