@@ -8,7 +8,7 @@ module.exports = {
         const leaderboards = [
             'exp',
             'love'
-        ]
+        ];
 
         const leaderboardKey = args[0];
 
