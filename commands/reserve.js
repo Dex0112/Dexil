@@ -49,11 +49,8 @@ module.exports = {
                         channel.delete();
 
                         clearInterval(intervalID);
-
-                        return console.log("Done");
                     }
 
-                    console.log("Not quite");
                 }, CHANNEL_MIN_LIFE * 60 * 1000);
             });
         } catch(err) {
