@@ -1,15 +1,15 @@
 FROM node:latest
 
-ENV NODE_ENV=production
+# Create the directory!
+RUN mkdir -p /usr/src/bot
+WORKDIR /usr/src/bot
 
-WORKDIR /bot
+# Copy and Install our bot
+COPY package.json /usr/src/bot
+RUN npm install
 
-COPY package*.json ./
+# Our precious bot
+COPY . /usr/src/bot
 
-# RUN npm install
-# If you are building your code for production
-RUN npm ci --only=production
-
-COPY . .
-
-CMD ["node", "main.js"] 
+# Start me!
+CMD ["node", "main.js"]
