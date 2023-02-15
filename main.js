@@ -25,6 +25,7 @@ module.exports.Permissions = class Permissions {
         "MANAGE_MESSAGES",
         ['946150969379532870']    
     );
+
     static MANAGE_USERS = new Permissions(
         "MANAGE_USERS",
         ['946150969379532870']    
