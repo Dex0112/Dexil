@@ -14,3 +14,5 @@ COPY . .
 
 # Expose the port that the bot will listen on
 EXPOSE 3000
+
+CMD ["node", "main.js"]
