@@ -1,8 +1,8 @@
-FROM node:16
+FROM node:latest
 
 ENV NODE_ENV=production
 
-WORKDIR /app
+WORKDIR /bot
 
 COPY package*.json ./
 
@@ -11,7 +11,5 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 COPY . .
-
-EXPOSE 3000
 
 CMD ["node", "main.js"] 

@@ -1,7 +1,7 @@
 const { Permissions } = require('../main');
 
 module.exports = {
-    name: "message",
+    name: "messageuser",
     description: "Sends message to user (``-message @user \"Message here!\"``). MODS ONLY",
     execute(message, args) {
         if(!Permissions.hasPermission(message.member, Permissions.MANAGE_USERS))
