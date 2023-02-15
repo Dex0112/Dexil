@@ -1,5 +1,3 @@
-const { ReactionUserManager } = require("discord.js");
-
 module.exports = (Discord, client, message) => {
     const prefix = client.commandPrefix;
 
