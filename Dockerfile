@@ -1,15 +1,16 @@
-FROM node:latest
+FROM node:14-slim
 
-# Create the directory!
-RUN mkdir -p /usr/src/bot
-WORKDIR /usr/src/bot
+# Set the working directory to /app
+WORKDIR /app
 
-# Copy and Install our bot
-COPY package.json /usr/src/bot
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Our precious bot
-COPY . /usr/src/bot
+# Copy the rest of the application code
+COPY . .
 
-# Start me!
-CMD ["node", "main.js"]
+# Expose the port that the bot will listen on
+EXPOSE 3000
