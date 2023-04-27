@@ -23,12 +23,12 @@ client.commandPrefix = '-';
 module.exports.Permissions = class Permissions {
     static MANAGE_MESSAGES = new Permissions(
         "MANAGE_MESSAGES",
-        ['946150969379532870']    
+        ['1100607380485582878']    
     );
 
     static MANAGE_USERS = new Permissions(
         "MANAGE_USERS",
-        ['946150969379532870']    
+        ['1100607380485582878']    
     );
 
     constructor(name, roles) {
@@ -54,15 +54,11 @@ client.validateMessage = async (message) => {
     const spamCheckRange = 10;
     const maxSpamCount = 2;
     
-    const unregulatedChannels = ['945730937432444998'];
+    const unregulatedChannels = ['1100612668378841159'];
 
     const bannedKeywords = [
         "kys",
         "kill yourself"
-    ];
-
-    const bannedNames = [
-        "landon", "landen", "land0n", "l@ndon", "l@nden", "l@and0n"
     ];
 
     for(const keyword of bannedKeywords) {
@@ -73,10 +69,6 @@ client.validateMessage = async (message) => {
     if(message.content.includes("​"))
         return client.deleteMessage(message, "Zero width character used");
 
-    for(const name of bannedNames) {
-        if(message.content.toLowerCase().includes(name))
-            client.deleteMessage(message, "Saying the wrong name", 24*60);
-    }
     if(message.content.startsWith(client.commandPrefix))
         return;
 
@@ -140,7 +132,7 @@ client.deleteMessage = (message, reason = null, timeoutLength = 0) => {
 };
 
 client.timeoutMember = (member, timeoutLength, reason, callback) => {
-    if(timeoutLength == 0)
+    if(timeoutLength == 0)1100607380485582878
         return;
     
     member.timeout(timeoutLength * 1000 * 60).then(() => {
@@ -157,7 +149,7 @@ client.timeoutMember = (member, timeoutLength, reason, callback) => {
 };
 
 client.updateLog = (logMessage) => {
-    const logChannelID = "1029236790537764904";
+    const logChannelID = "1100992890936774697";
     const logChannel = client.guilds.cache.get("939667236786937896").channels.cache.get(logChannelID);
 
     logChannel.send(logMessage);

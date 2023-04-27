@@ -3,9 +3,13 @@ module.exports = (Discord, client, message) => {
 
     if(message.author.bot) return;
 
-    if(message.channelId == "1041163087073513532") {
-        if(client.devMode == "production") return;
-    } else if(client.devMode == 'local') return;
+    if('1100985464984457368' == message.channel.id) {
+        if(client.devMode == 'production') {
+           return; 
+        }
+    } else if(client.devMode == 'local') {
+       return; 
+    }
 
     if(message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).split(/ +/);
