@@ -3,7 +3,7 @@ module.exports = (Discord, client, message) => {
 
     if(message.author.bot) return;
 
-    if('1100985464984457368' == message.channel.id) {
+    if('1100985522442211328' == message.channel.id) {
         if(client.devMode == 'production') {
            return; 
         }

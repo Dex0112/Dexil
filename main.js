@@ -132,7 +132,7 @@ client.deleteMessage = (message, reason = null, timeoutLength = 0) => {
 };
 
 client.timeoutMember = (member, timeoutLength, reason, callback) => {
-    if(timeoutLength == 0)1100607380485582878
+    if(timeoutLength == 0)
         return;
     
     member.timeout(timeoutLength * 1000 * 60).then(() => {
