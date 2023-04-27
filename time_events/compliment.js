@@ -39,7 +39,7 @@ module.exports = {
         }
     },
     execute() {
-        const members = helper.getMembersInRole('989003511968714812');
+        const members = helper.getMembersInRole('1101010432438841397');
 
 
         for(const member of members) {
