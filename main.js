@@ -59,7 +59,6 @@ client.validateMessage = async (message) => {
     const bannedKeywords = [
         "kys",
         "kill yourself",
-        "fuck you"
     ];
 
     for(const keyword of bannedKeywords) {

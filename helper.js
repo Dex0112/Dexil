@@ -17,7 +17,7 @@ module.exports = {
         return nextLevelExp - exp;
     },
 
-    getMembersInRole(roleID, guildID = '939667236786937896') {
+    getMembersInRole(roleID, guildID = '1100606978172133488') {
         const { client } = require('./main');
 
         const role = client.guilds.cache.get(guildID).roles.cache.get(roleID);
