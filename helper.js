@@ -4,6 +4,12 @@ module.exports = {
         return module.exports.getDisplayName(member);
     },
 
+    getDisplayName: (member) => {
+        if(!member) return null;
+
+        return member.nickname ? member.nickname : member.user.username;
+    },
+
     calculateLevel: (exp = Number()) => {
         exp = Math.min(exp, 0);
 

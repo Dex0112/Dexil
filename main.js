@@ -150,7 +150,7 @@ client.timeoutMember = (member, timeoutLength, reason, callback) => {
 
 client.updateLog = (logMessage) => {
     const logChannelID = "1100992890936774697";
-    const logChannel = client.guilds.cache.get("939667236786937896").channels.cache.get(logChannelID);
+    const logChannel = client.guilds.cache.get("1100606978172133488").channels.cache.get(logChannelID);
 
     logChannel.send(logMessage);
 };

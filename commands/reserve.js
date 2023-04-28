@@ -6,7 +6,7 @@ module.exports = {
     execute: (message, args) => {
         const CHANNEL_MIN_LIFE = 1;
 
-        const category = message.guild.channels.cache.get('939667237244141650');
+        const category = message.guild.channels.cache.get('1100606978755145760');
 
         const role = message.mentions.roles.first();
 

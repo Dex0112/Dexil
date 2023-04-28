@@ -12,9 +12,9 @@ module.exports = {
         if(member.user.username == message.author.username)
             return message.reply("No, don't do it!");
         
-        if(member.roles.cache.some(role => role == '945164718186852412'))
+        if(member.roles.cache.some(role => role == '1100984821624356938'))
             return message.reply("Bots can't die dummy!");
-        else if(member.roles.cache.some(role => role == '946150969379532870'))
+        else if(member.roles.cache.some(role => role == '1100607380485582878'))
             return message.reply("They are too strong!");
 
         const recipient = helper.getDisplayName(member);
