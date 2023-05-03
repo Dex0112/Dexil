@@ -39,6 +39,7 @@ module.exports = {
         }
     },
     execute() {
+        const complimentRole = '1101010432438841397';
         const members = helper.getMembersInRole('1101010432438841397');
 
 

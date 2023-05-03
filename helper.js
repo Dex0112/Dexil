@@ -28,8 +28,8 @@ module.exports = {
 
         const role = client.guilds.cache.get(guildID).roles.cache.get(roleID);
 
-
         const members = [...role.members.values()];
+
         return members;
     }
 }
