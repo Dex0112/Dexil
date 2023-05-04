@@ -12,12 +12,12 @@ module.exports = {
 
         const spectators = args[1]?.toLowerCase() == 'true' || false;
 
-        if(!role)
+        if (!role)
             return message.reply("You must add a valid role as a parameter to reserve a voice channel!");
-        
-        if(!message.member.roles.cache.has(role.id) && !message.member.roles.cache.has('939667378948681730'))
+
+        if (!message.member.roles.cache.has(role.id) && !message.member.roles.cache.has('939667378948681730'))
             return message.reply("You must have the role you want to reserve a voice channel for!")
-        
+
         const permissionOverwrites = [
             {
                 id: role.id,
@@ -27,7 +27,7 @@ module.exports = {
 
         const generalPermission = { id: message.guild.id, allow: [], deny: [] };
 
-        if(spectators) {
+        if (spectators) {
             generalPermission.deny.push(Permissions.FLAGS.SPEAK);
             generalPermission.allow.push(Permissions.FLAGS.CONNECT);
         } else {
@@ -45,7 +45,7 @@ module.exports = {
                 message.reply(`You have ${CHANNEL_MIN_LIFE} minutes to join ${channel}!`);
 
                 var intervalID = setInterval(() => {
-                    if(channel.members.size <= 0) {
+                    if (channel.members.size <= 0) {
                         channel.delete();
 
                         clearInterval(intervalID);
@@ -53,7 +53,7 @@ module.exports = {
 
                 }, CHANNEL_MIN_LIFE * 60 * 1000);
             });
-        } catch(err) {
+        } catch (err) {
             message.reply("There was an unexpected error while creating the voice channel!");
         }
     }
